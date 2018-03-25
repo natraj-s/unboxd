@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+
+@font-face {
+    font-family: "COCOGOOSELETTERPRESS";
+    src: url("COCOGOOSELETTERPRESS TRIAL.ttf")
+}
+
+#logo {
+    font-family: 'COCOGOOSELETTERPRESS', sans-serif;
+    font-size: 72px;
+    font-weight: 600;
+    color: #2e2b2b;
+}
