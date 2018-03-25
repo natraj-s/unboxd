@@ -2,19 +2,16 @@ import React from "react";
 import "./Logo.css";
 
 const Logo = () =>
-    <div className="container">
+    <div className="container headerCont">
         <div className="row">
-            <div className="col-md-3">
-                Login/Sign Up
+            <div className="container-fluid">
+                <p id="logo">unBox'd </p>
+                {/* <hr /> */}
             </div>
-            <div className="col-md-6">
-                <div className="container-fluid">
-                    <p id="logo">unBox'd </p>
-                    {/* <hr /> */}
-                </div>
-            </div>
-            <div className="col-md-3">
-                Logout
+        </div>
+        <div className="row login">
+            <div className="container-fluid">
+                <button type="button" className="btn btn-dark">LOGIN/SIGN UP</button>
             </div>
         </div>
     </div>
