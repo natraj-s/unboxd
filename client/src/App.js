@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import './index.css';
+import './js/main.js'
+import Logo from "./components/Logo";
+import Navbar from "./components/Navbar";
+import Catbar from "./components/Catbar";
 
 class App extends Component {
+
+  state = {
+    currentPage: "Trending",
+    currentCat: "All"
+  };
+
+  handlePageChange = page => {
+    this.setState({ currentPage: page });
+  }
+
+  handleCatChange = cat => {
+    this.setState({ currentCat: cat });
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Logo />
+
+        <Navbar currentPage={this.state.currentPage}
+          handlePageChange={this.handlePageChange}
+        />
+
+        <Catbar currentCat={this.state.currentCat}
+          handleCatChange={this.handleCatChange}
+        />
+
       </div>
     );
   }
