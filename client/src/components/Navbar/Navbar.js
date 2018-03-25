@@ -7,15 +7,15 @@ const Navbar = props => (
             <ul className="nav justify-content-center nav-tabs">
                 <li onClick={() => props.handlePageChange("Trending")}
                     className="nav-item">
-                    <a className={props.currentPage === "Trending" ? "nav-link active" : "nav-link"} href="#">Trending</a>
+                    <a className={props.currentPage === "Trending" ? "nav-link active" : "nav-link"}>Trending</a>
                 </li>
                 <li onClick={() => props.handlePageChange("Breaking")}
                     className="nav-item">
-                    <a className={props.currentPage === "Breaking" ? "nav-link active" : "nav-link"} href="#">Breaking</a>
+                    <a className={props.currentPage === "Breaking" ? "nav-link active" : "nav-link"}>Breaking</a>
                 </li>
                 <li onClick={() => props.handlePageChange("Aged")}
                     className="nav-item">
-                    <a className={props.currentPage === "Aged" ? "nav-link active" : "nav-link"} href="#">Aged</a>
+                    <a className={props.currentPage === "Aged" ? "nav-link active" : "nav-link"}>Aged</a>
                 </li>
             </ul>
         </div>

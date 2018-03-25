@@ -6,6 +6,7 @@ import './js/main.js'
 import Logo from "./components/Logo";
 import Navbar from "./components/Navbar";
 import Catbar from "./components/Catbar";
+import Content from "./components/Content";
 
 class App extends Component {
 
@@ -34,6 +35,8 @@ class App extends Component {
         <Catbar currentCat={this.state.currentCat}
           handleCatChange={this.handleCatChange}
         />
+
+        <Content />
 
       </div>
     );
