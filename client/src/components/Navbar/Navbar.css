@@ -8,6 +8,10 @@
     border-color: #343a4080;
 }
 
+.nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+    border-color: #d7dde2 #d7dde2 transparent;
+}
+
 .nav-tabs .nav-link.active {
     border-color: #343a4080 #343a4080 transparent;
     background: #ffaf70; /* Old browsers */

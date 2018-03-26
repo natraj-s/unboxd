@@ -123,7 +123,8 @@ class Content extends React.Component {
                     />
                 </div>
                 <div className="container">
-                    <ContentPane props={this.state.content} />
+                    <ContentPane props={this.state.content} 
+                                category={this.state.currentCat} />
                 </div>
             </div>
         );
