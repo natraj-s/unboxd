@@ -5,7 +5,6 @@ const Article = (props) =>
     <div className="container ">
         <div className="row">
             <div className="container-fluid">
-                {console.log("here at: ", props.category)}
                 <div className={props.category === "Entertainment" ? "article entertainment" :
                     props.category === "Sports" ? "article sports" :
                         props.category === "Science" ? "article science" :

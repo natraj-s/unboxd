@@ -12,7 +12,6 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.state.currentCat);
     return (
       <div className="App">
         <div className="container mainContainer">
