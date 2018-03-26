@@ -1,41 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Crete+Round');
+
 .article {
     border-radius: 4px;
-    border: 1px solid #343a40;
-    padding-bottom: 15px;
+    border-top-right-radius: 4px;
+    border-left: 6px solid #1869B1;
+    border-bottom: 1px solid #e6e6e6;
     margin-top: 15px;
     display: block;
     text-align: justify;
+    box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
+    background-color: #FCF7F8;
+}
+
+hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.article:hover {
+    box-shadow: 3px 3px 3px rgba(50,50,50,0.28);
+    background-color: #fff;
 }
 
 .artHeader, .artBody {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 20px;
+    padding-top: 5px;
 }
 
 .artHeader {
-    background-color: #343a40;
-    color: #fff;
-}
-
-.artHeader > hr {
-    border-color: #fff;
+    /* background-color: #0084CC; */
+    background: #7abcff; /* Old browsers */
+    background: -moz-linear-gradient(top, #7abcff 0%, #60abf8 44%, #4096ee 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #7abcff 0%,#60abf8 44%,#4096ee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee',GradientType=0 ); /* IE6-9 */
+    color: #F8F8F8;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid #1869B1;
 }
 
 .title {
-    position: relative;
-    float: left;    
-    font-size: 16px;
-    font-weight: 600;
+    font-family: 'Crete Round', serif;
+    font-size: 22px;
+    text-shadow: 2px 2px 2px #386899;
+    cursor: pointer;
 }
 
-.source {
-    position: relative; 
-    text-align: right;
-    padding-bottom: 10px;
+.title:hover {
+    text-shadow: 2px 2px 2px #343a40;
 }
 
+.source { 
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.source label {
+    font-size: 11px;
+    padding-right: 5px;
+}
+
+.source span {
+    margin-right: 15px;
+    font-size: 14px;
+}
 
 .artBody {
+    background-color: #FCF7F8;
     text-align: justify;
+    cursor: default;
+}
+
+.artBody:hover{
+    background-color: #fff;
+}
+
+.misc {
+    text-align: right;
+    color: rgba(50,50,50,0.28);
+}
+
+.hidden {
+    display: none;
 }
