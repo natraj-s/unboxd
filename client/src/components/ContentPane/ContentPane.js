@@ -8,7 +8,7 @@ const ContentPane = props => (
             <p>Undefined</p> :
         props.props.articles.map((article, index) => (
                 <Article
-                    key={article.publishedAt}
+                    key={article.url}
                     author={article.author}
                     descr={article.description}
                     publAt={article.publishedAt}
@@ -17,6 +17,7 @@ const ContentPane = props => (
                     url={article.url}
                     img={article.urlToImage}
                     look={index%2 !== 0 ? "dark" : ""}
+                    category={props.category}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}
                 />

@@ -5,16 +5,25 @@ const Article = (props) =>
     <div className="container ">
         <div className="row">
             <div className="container-fluid">
-                <div className="article">
+                {console.log("here at: ", props.category)}
+                <div className={props.category === "Entertainment" ? "article entertainment" :
+                    props.category === "Sports" ? "article sports" :
+                        props.category === "Science" ? "article science" :
+                            props.category === "Health" ? "article health" :
+                                props.category === "Tech" ? "article tech" :
+                                    props.category === "VideoGames" ? "article videogames" :
+                                        props.category === "Business" ? "article business" :
+                                            "article all"}>
                     <div className={props.look === "" ? "artHeader light" : "artHeader dark"}>
                         <div className="title">
-                            <a href={props.url} target="_blank">{props.title}</a>
-                            <hr />
+                            <div className="image" style={{ backgroundImage: `url(${props.img})` }} title={props.title}>
+                            </div>
+                            <span className="artTitle"><a href={props.url} target="_blank">{props.title}</a></span>
                         </div>
                         <div className="source">
                             <p>
                                 <span>
-                                   {props.source}
+                                    {props.source}
                                 </span>
                                 <span>
                                     <label id="publatlabel">POSTED AT: </label>{props.publAt}
@@ -33,7 +42,7 @@ const Article = (props) =>
                         </p>
                         <div className="misc">
                             {/* <span onClick={() => props.hidden === "true" ? props.isHidden("false") : props.isHidden("true")} */}
-                                <span className="oi oi-chevron-top"></span>
+                            <span className="oi oi-chevron-top"></span>
                         </div>
                     </div>
 
