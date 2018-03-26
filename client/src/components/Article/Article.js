@@ -6,7 +6,7 @@ const Article = (props) =>
         <div className="row">
             <div className="container-fluid">
                 <div className="article">
-                    <div className="artHeader">
+                    <div className={props.look === "" ? "artHeader light" : "artHeader dark"}>
                         <div className="title">
                             <a href={props.url} target="_blank">{props.title}</a>
                             <hr />

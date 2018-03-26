@@ -6,16 +6,17 @@ const ContentPane = props => (
     <div className="container-fluid contentArea">
         {!props.props.articles ?
             <p>Undefined</p> :
-        props.props.articles.map(article => (
+        props.props.articles.map((article, index) => (
                 <Article
                     key={article.publishedAt}
                     author={article.author}
                     descr={article.description}
                     publAt={article.publishedAt}
                     source={article.source.name}
-                    title={article.title}
+                    title={article.title}                    
                     url={article.url}
                     img={article.urlToImage}
+                    look={index%2 !== 0 ? "dark" : ""}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}
                 />

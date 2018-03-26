@@ -9,6 +9,10 @@
 }
 
 .nav-tabs .nav-link.active {
-    border-color: #343a4080 #343a4080 #fff;
+    border-color: #343a4080 #343a4080 transparent;
+    background: #ffaf70; /* Old browsers */
+    box-shadow: 2px 0px 0px rgba(50,50,50,0.28),
+                0px 0px 0px rgba(50,50,50,0.28),
+                0px 0px 0px rgba(50,50,50,0.28);
 }
 
