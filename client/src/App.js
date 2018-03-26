@@ -15,9 +15,10 @@ class App extends Component {
     console.log(this.state.currentCat);
     return (
       <div className="App">
+        <div className="container mainContainer">
         <Logo />
         <Content />
-
+      </div>
       </div>
     );
   }

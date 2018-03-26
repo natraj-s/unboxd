@@ -8,6 +8,24 @@ body {
   color: #000;
 }
 
+.App {
+  background: #d66d75; /* Old browsers */
+  background: -moz-linear-gradient(left, #d66d75 0%, #e29587 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #d66d75 0%,#e29587 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #d66d75 0%,#e29587 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d66d75', endColorstr='#e29587',GradientType=1 ); /* IE6-9 */
+}
+
+.mainContainer {
+  padding-bottom: 20px;
+  box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
+  background: #ff5f6d; /* Old browsers */
+  background: -moz-linear-gradient(45deg, #ff5f6d 0%, #ffc371 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, #ff5f6d 0%,#ffc371 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, #ff5f6d 0%,#ffc371 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5f6d', endColorstr='#ffc371',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
 a {
   color: inherit;
 }
