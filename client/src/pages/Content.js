@@ -26,6 +26,14 @@ class Content extends React.Component {
         this.updateContent(cat);
     }
 
+    setDefaultCounter = (data) => {
+        let temp = data;
+        temp.articles.forEach((element, index) => {
+            element.counter = 0;
+        });
+        return temp;
+    }
+
     // isHidden = hidden => {
     //     this.setState({ hidden: hidden });
     // }
@@ -47,7 +55,8 @@ class Content extends React.Component {
                             content: res.data
                         })
                         console.log("API entertainment");
-                        localStorage.setItem("Entertainment", JSON.stringify(res.data));
+                        console.log(this.setDefaultCounter(res.data));
+                        localStorage.setItem("Entertainment", JSON.stringify(this.setDefaultCounter(res.data)));
                         localStorage.setItem("EntertainmentDate", Date.now());
                     }).catch(err => console.log(err));
             }
@@ -67,7 +76,8 @@ class Content extends React.Component {
                             content: res.data
                         })
                         console.log("API sports");
-                        localStorage.setItem("Sports", JSON.stringify(res.data));
+                        this.setDefaultCounter(res.data);
+                        localStorage.setItem("Sports", JSON.stringify(this.setDefaultCounter(res.data)));
                         localStorage.setItem("SportsDate", Date.now());
                     }).catch(err => console.log(err));
             }
@@ -87,7 +97,8 @@ class Content extends React.Component {
                             content: res.data
                         })
                         console.log("API science");
-                        localStorage.setItem("Science", JSON.stringify(res.data));
+                        this.setDefaultCounter(res.data);
+                        localStorage.setItem("Science", JSON.stringify(this.setDefaultCounter(res.data)));
                         localStorage.setItem("ScienceDate", Date.now());
                     }).catch(err => console.log(err));
             }
@@ -107,7 +118,8 @@ class Content extends React.Component {
                         content: res.data
                     })
                     console.log("API health");
-                    localStorage.setItem("Health", JSON.stringify(res.data));
+                    this.setDefaultCounter(res.data);
+                    localStorage.setItem("Health", JSON.stringify(this.setDefaultCounter(res.data)));
                     localStorage.setItem("HealthDate", Date.now());
                 }).catch(err => console.log(err));                    
             }            
@@ -127,7 +139,8 @@ class Content extends React.Component {
                         content: res.data
                     })
                     console.log("API tech");
-                    localStorage.setItem("Tech", JSON.stringify(res.data));
+                    this.setDefaultCounter(res.data);
+                    localStorage.setItem("Tech", JSON.stringify(this.setDefaultCounter(res.data)));
                     localStorage.setItem("TechDate", Date.now());
                 }).catch(err => console.log(err));
             }            
@@ -147,7 +160,8 @@ class Content extends React.Component {
                         content: res.data
                     })
                     console.log("API videogames");
-                    localStorage.setItem("VideoGames", JSON.stringify(res.data));
+                    this.setDefaultCounter(res.data);
+                    localStorage.setItem("VideoGames", JSON.stringify(this.setDefaultCounter(res.data)));
                     localStorage.setItem("VideoGamesDate", Date.now());
                 }).catch(err => console.log(err));
             }
@@ -167,7 +181,8 @@ class Content extends React.Component {
                         content: res.data
                     })
                     console.log("API business");
-                    localStorage.setItem("Business", JSON.stringify(res.data));
+                    this.setDefaultCounter(res.data);
+                    localStorage.setItem("Business", JSON.stringify(this.setDefaultCounter(res.data)));
                     localStorage.setItem("BusinessDate", Date.now());
                 }).catch(err => console.log(err));
             }
@@ -187,7 +202,8 @@ class Content extends React.Component {
                         content: res.data
                     })
                     console.log("API all");
-                    localStorage.setItem("All", JSON.stringify(res.data));
+                    this.setDefaultCounter(res.data);
+                    localStorage.setItem("All", JSON.stringify(this.setDefaultCounter(res.data)));
                     localStorage.setItem("AllDate", Date.now());
                 }).catch(err => console.log(err));
             }            

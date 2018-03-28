@@ -18,6 +18,7 @@ const ContentPane = props => (
                     img={article.urlToImage}
                     look={index%2 !== 0 ? "dark" : ""}
                     category={props.category}
+                    clicks={article.counter}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}
                 />
