@@ -159,6 +159,7 @@ class Content extends React.Component {
                     localStorage.setItem("Sports", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("SportsAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
         if (category === "Science") {
@@ -179,6 +180,7 @@ class Content extends React.Component {
                     localStorage.setItem("Science", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("ScienceAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
         if (category === "Health") {
@@ -199,6 +201,7 @@ class Content extends React.Component {
                     localStorage.setItem("Health", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("HealthAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
         if (category === "Tech") {
@@ -219,6 +222,7 @@ class Content extends React.Component {
                     localStorage.setItem("Tech", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("TechAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
         if (category === "VideoGames") {
@@ -239,6 +243,7 @@ class Content extends React.Component {
                     localStorage.setItem("VideoGames", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("VideoGamesAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
         if (category === "Business") {
@@ -259,6 +264,7 @@ class Content extends React.Component {
                     localStorage.setItem("Business", JSON.stringify(data));
                     data.sort(this.ageSort);
                     localStorage.setItem("BusinessAged", JSON.stringify(data));
+                    this.handlePageChange(this.state.currentPage);
                 }).catch(err => console.log(err));
         }
 
@@ -268,10 +274,11 @@ class Content extends React.Component {
         if (cat === "Entertainment") {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("EntertainmentDate"), 10));
             if (localStorage.getItem("Entertainment") && !isNaN(diff) && diff < 180000000000000000) {
-                this.setState({
-                    content: JSON.parse(localStorage.getItem("Entertainment"))
+                this.setState({                    
+                    content: this.state.currentPage === "Aged" ?                         
+                        JSON.parse(localStorage.getItem("EntertainmentAged"))
+                    :   JSON.parse(localStorage.getItem("Entertainment"))
                 });
-                this.handlePageChange(this.state.currentPage);
                 console.log("Ent difference is: " + diff);
             }
             else {
@@ -283,7 +290,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("SportsDate"), 10));
             if (localStorage.getItem("Sports") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Sports"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("SportsAged"))
+                         :JSON.parse(localStorage.getItem("Sports"))
                 });
                 console.log("Sports difference is: " + diff);
             }
@@ -296,7 +305,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("ScienceDate"), 10));
             if (localStorage.getItem("Science") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Science"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("ScienceAged"))
+                            : JSON.parse(localStorage.getItem("Science"))
                 });
                 console.log("Science difference is: " + diff);
             }
@@ -309,7 +320,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("HealthDate"), 10));
             if (localStorage.getItem("Health") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Health"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("HealthAged"))
+                            : JSON.parse(localStorage.getItem("Health"))
                 });
                 console.log("Health difference is: " + diff);
             }
@@ -322,7 +335,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("TechDate"), 10));
             if (localStorage.getItem("Tech") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Tech"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("TechAged"))
+                            : JSON.parse(localStorage.getItem("Tech"))
                 });
                 console.log("Tech difference is: " + diff);
             }
@@ -335,7 +350,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("VideoGamesDate"), 10));
             if (localStorage.getItem("VideoGames") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("VideoGames"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("VideoGamesAged"))
+                            : JSON.parse(localStorage.getItem("VideoGames"))
                 });
                 console.log("VideoGames difference is: " + diff);
             }
@@ -348,7 +365,9 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("BusinessDate"), 10));
             if (localStorage.getItem("Business") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Business"))
+                    content: this.state.currentPage === "Aged" ?
+                            JSON.parse(localStorage.getItem("BusinessAged"))
+                            : JSON.parse(localStorage.getItem("Business"))
                 });
                 console.log("Business difference is: " + diff);
             }
@@ -361,9 +380,10 @@ class Content extends React.Component {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("HomepageDate"), 10));
             if (localStorage.getItem("Homepage") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
-                    content: JSON.parse(localStorage.getItem("Homepage"))
+                    content: this.state.currentPage === "Aged" ?
+                                JSON.parse(localStorage.getItem("HomepageAged"))
+                            : JSON.parse(localStorage.getItem("Homepage"))
                 });
-                this.handlePageChange(this.state.currentPage);
                 console.log("Homepage difference is: " + diff);
                 // console.log()
             }
