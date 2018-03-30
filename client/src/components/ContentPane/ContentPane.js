@@ -13,7 +13,7 @@ const ContentPane = props => (
                     title={article.title}
                     author={article.author}
                     publAt={article.publishedAt}
-                    source={article.source.name}
+                    source={article.source}
                     url={article.url}
                     img={article.urlToImage}
                     descr={article.description}
