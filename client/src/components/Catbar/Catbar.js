@@ -5,9 +5,9 @@ const Catbar = props => (
     <div className="container">
         <div className="container-fluid">
             <ul className="nav nav-pills nav-fill">
-                <li onClick={() => props.handleCatChange("All")}
+                <li onClick={() => props.handleCatChange("Homepage")}
                     className="nav-item">
-                    <a className={props.currentCat === "All" ? "nav-link active" : "nav-link"}>ALL</a>
+                    <a className={props.currentCat === "Homepage" ? "nav-link active" : "nav-link"}>ALL</a>
                 </li>
                 <li onClick={() => props.handleCatChange("Entertainment")}
                     className="nav-item">
