@@ -4,12 +4,14 @@ import "./Content.css";
 import Navbar from "../components/Navbar";
 import Catbar from "../components/Catbar";
 import ContentPane from "../components/ContentPane";
+import LoadingWheel from "../components/LoadingWheel";
 
 class Content extends React.Component {
     state = {
         content: [],
         currentPage: "Breaking",
-        currentCat: "Homepage"
+        currentCat: "Homepage",
+        loading: false
         // hidden: "false"
     }
 
@@ -48,16 +50,11 @@ class Content extends React.Component {
         console.log("Entered this call at " + Date.now() + " " + page);
         API.getLatest(this.state.currentCat)
             .then(res => {
-                console.log("Retrieving at ", Date.now());
-
-                console.log("Retrieving 2nd at ", Date.now());
                 let data = res.data;
-                console.log("page change data", res.data);
                 console.log("original this.state.currentCat ", this.state.currentCat);
                 localStorage.setItem(this.state.currentCat, JSON.stringify(data));
 
                 data.sort(this.ageSort);
-                console.log("page change aged data", data);
                 console.log("aged this.state.currentCat ", this.state.currentCat);
 
                 localStorage.setItem(this.state.currentCat + "Aged", JSON.stringify(data));
@@ -71,14 +68,16 @@ class Content extends React.Component {
         this.setState({ currentPage: order });
         if (order === "Aged") {
             this.setState({
-                content: JSON.parse(localStorage.getItem(this.state.currentCat + "Aged"))
+                content: JSON.parse(localStorage.getItem(this.state.currentCat + "Aged")),
+                loading: false
             });
 
         }
         if (order === "Breaking") {
             console.log("Breaking? ", order);
             this.setState({
-                content: JSON.parse(localStorage.getItem(this.state.currentCat))
+                content: JSON.parse(localStorage.getItem(this.state.currentCat)),
+                loading: false
             });
         }
     }
@@ -122,6 +121,7 @@ class Content extends React.Component {
         if (category === "Homepage") {
             API.getHomepage()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -146,6 +146,7 @@ class Content extends React.Component {
         if (category === "Entertainment") {
             API.getEntertainment()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -161,6 +162,7 @@ class Content extends React.Component {
         if (category === "Sports") {
             API.getSports()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -176,6 +178,7 @@ class Content extends React.Component {
         if (category === "Science") {
             API.getScience()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -191,6 +194,7 @@ class Content extends React.Component {
         if (category === "Health") {
             API.getHealth()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -206,6 +210,7 @@ class Content extends React.Component {
         if (category === "Tech") {
             API.getTechnology()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -221,6 +226,7 @@ class Content extends React.Component {
         if (category === "VideoGames") {
             API.getVideoGames()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -236,6 +242,7 @@ class Content extends React.Component {
         if (category === "Business") {
             API.getBusiness()
                 .then(res => {
+                    this.setState({loading: true});
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -391,8 +398,10 @@ class Content extends React.Component {
                     />
                 </div>
                 <div className="container">
-                    <ContentPane props={this.state.content}
-                        category={this.state.currentCat} />
+                    {this.state.loading ? <LoadingWheel /> : 
+                        <ContentPane props={this.state.content}
+                        category={this.state.currentCat} />}
+                    
                 </div>
             </div>
         );

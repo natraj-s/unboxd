@@ -56,7 +56,6 @@ export default {
     },
 
     getLatest: function(category) {
-        console.log("API.getLatest");
         return axios.get("/api/unboxd/breaking/"+ category);
     },
 
