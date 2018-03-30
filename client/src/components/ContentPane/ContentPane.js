@@ -4,21 +4,22 @@ import "./ContentPane.css";
 
 const ContentPane = props => (
     <div className="container-fluid contentArea">
-        {!props.props.articles ?
+        {console.log(props)}
+        {!props.props ?
             <p>Undefined</p> :
-        props.props.articles.map((article, index) => (
+        props.props.map((article, index) => (
                 <Article
                     key={article.url}
+                    title={article.title}
                     author={article.author}
-                    descr={article.description}
                     publAt={article.publishedAt}
                     source={article.source.name}
-                    title={article.title}                    
                     url={article.url}
                     img={article.urlToImage}
+                    descr={article.description}
                     look={index%2 !== 0 ? "dark" : ""}
                     category={props.category}
-                    clicks={article.counter}
+                    clicks={article.clicks}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}
                 />

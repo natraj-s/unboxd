@@ -20,7 +20,7 @@ class Article extends Component {
 
         data.articles.forEach(element => {
             if(element.title === this.props.title) {
-                element.counter = parseInt(element.counter) + 1;
+                element.counter = parseInt(element.counter, 10) + 1;
                 this.setState({ counter: element.counter });
             }
         });
