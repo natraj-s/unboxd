@@ -22,13 +22,53 @@ class Content extends React.Component {
         this.updateContent(cat);
     }
 
+    ageSort = (a, b) => {
+        if (a.publishedAt < b.publishedAt) {
+            return -1;
+        }
+        if (a.publishedAt > b.publishedAt) {
+            return 1;
+        }
+        return 0;
+    }
+
+    newSort = (a, b) => {
+        if (a.publishedAt < b.publishedAt) {
+            return 1;
+        }
+        if (a.publishedAt > b.publishedAt) {
+            return -1;
+        }
+        return 0;
+    }
+
+
     handlePageChange = page => {
         this.setState({ currentPage: page });
-        console.log("this.state.currentCat ", this.state.currentCat);
-        this.sortBy(page);   
+        console.log("Entered this call at " + Date.now() + " " + page);
+        API.getLatest(this.state.currentCat)
+            .then(res => {
+                console.log("Retrieving at ", Date.now());
+
+                console.log("Retrieving 2nd at ", Date.now());
+                let data = res.data;
+                console.log("page change data", res.data);
+                console.log("original this.state.currentCat ", this.state.currentCat);
+                localStorage.setItem(this.state.currentCat, JSON.stringify(data));
+
+                data.sort(this.ageSort);
+                console.log("page change aged data", data);
+                console.log("aged this.state.currentCat ", this.state.currentCat);
+
+                localStorage.setItem(this.state.currentCat + "Aged", JSON.stringify(data));
+                this.sortBy(page);
+            }
+            );
     }
 
     sortBy = (order) => {
+        console.log("entered");
+        this.setState({ currentPage: order });
         if (order === "Aged") {
             this.setState({
                 content: JSON.parse(localStorage.getItem(this.state.currentCat + "Aged"))
@@ -41,26 +81,6 @@ class Content extends React.Component {
                 content: JSON.parse(localStorage.getItem(this.state.currentCat))
             });
         }
-    }
-
-    ageSort = (a, b) => {
-        if(a.publishedAt < b.publishedAt) {
-            return -1;
-        }
-        if(a.publishedAt > b.publishedAt) {
-            return 1;
-        }   
-        return 0;
-    }
-
-    newSort = (a,b) => {
-        if(a.publishedAt < b.publishedAt) {
-            return 1;
-        }
-        if(a.publishedAt > b.publishedAt) {
-            return -1;
-        }   
-        return 0;
     }
 
     setDefaultCounter = (data) => {
@@ -109,15 +129,18 @@ class Content extends React.Component {
                         this.createArticle(elem, category);
                     });
 
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
+                    console.log("Done creating at ", Date.now());
+                    // data.sort(this.newSort);
+                    // this.setState({
+                    //     content: data
+                    // });
 
-                    localStorage.setItem("Homepage", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("HomepageAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    // localStorage.setItem("Homepage", JSON.stringify(data));
+                    // data.sort(this.ageSort);
+                    // localStorage.setItem("HomepageAged", JSON.stringify(data));
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Entertainment") {
@@ -130,15 +153,9 @@ class Content extends React.Component {
                         this.createArticle(elem, category);
                     });
 
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Entertainment", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("EntertainmentAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Sports") {
@@ -150,16 +167,10 @@ class Content extends React.Component {
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Sports", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("SportsAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Science") {
@@ -171,16 +182,10 @@ class Content extends React.Component {
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Science", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("ScienceAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Health") {
@@ -192,16 +197,10 @@ class Content extends React.Component {
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Health", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("HealthAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Tech") {
@@ -214,15 +213,9 @@ class Content extends React.Component {
                         this.createArticle(elem, category);
                     });
 
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Tech", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("TechAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "VideoGames") {
@@ -235,15 +228,9 @@ class Content extends React.Component {
                         this.createArticle(elem, category);
                     });
 
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("VideoGames", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("VideoGamesAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
         if (category === "Business") {
@@ -256,15 +243,9 @@ class Content extends React.Component {
                         this.createArticle(elem, category);
                     });
 
-                    data.sort(this.newSort);
-                    this.setState({
-                        content: data
-                    });             
-
-                    localStorage.setItem("Business", JSON.stringify(data));
-                    data.sort(this.ageSort);
-                    localStorage.setItem("BusinessAged", JSON.stringify(data));
-                    this.handlePageChange(this.state.currentPage);
+                    setTimeout(() => {
+                        this.handlePageChange(this.state.currentPage);
+                    }, 2000);
                 }).catch(err => console.log(err));
         }
 
@@ -274,10 +255,10 @@ class Content extends React.Component {
         if (cat === "Entertainment") {
             let diff = Date.now() - new Date(parseInt(localStorage.getItem("EntertainmentDate"), 10));
             if (localStorage.getItem("Entertainment") && !isNaN(diff) && diff < 180000000000000000) {
-                this.setState({                    
-                    content: this.state.currentPage === "Aged" ?                         
+                this.setState({
+                    content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("EntertainmentAged"))
-                    :   JSON.parse(localStorage.getItem("Entertainment"))
+                        : JSON.parse(localStorage.getItem("Entertainment"))
                 });
                 console.log("Ent difference is: " + diff);
             }
@@ -291,8 +272,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Sports") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("SportsAged"))
-                         :JSON.parse(localStorage.getItem("Sports"))
+                        JSON.parse(localStorage.getItem("SportsAged"))
+                        : JSON.parse(localStorage.getItem("Sports"))
                 });
                 console.log("Sports difference is: " + diff);
             }
@@ -306,8 +287,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Science") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("ScienceAged"))
-                            : JSON.parse(localStorage.getItem("Science"))
+                        JSON.parse(localStorage.getItem("ScienceAged"))
+                        : JSON.parse(localStorage.getItem("Science"))
                 });
                 console.log("Science difference is: " + diff);
             }
@@ -321,8 +302,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Health") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("HealthAged"))
-                            : JSON.parse(localStorage.getItem("Health"))
+                        JSON.parse(localStorage.getItem("HealthAged"))
+                        : JSON.parse(localStorage.getItem("Health"))
                 });
                 console.log("Health difference is: " + diff);
             }
@@ -336,8 +317,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Tech") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("TechAged"))
-                            : JSON.parse(localStorage.getItem("Tech"))
+                        JSON.parse(localStorage.getItem("TechAged"))
+                        : JSON.parse(localStorage.getItem("Tech"))
                 });
                 console.log("Tech difference is: " + diff);
             }
@@ -351,8 +332,8 @@ class Content extends React.Component {
             if (localStorage.getItem("VideoGames") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("VideoGamesAged"))
-                            : JSON.parse(localStorage.getItem("VideoGames"))
+                        JSON.parse(localStorage.getItem("VideoGamesAged"))
+                        : JSON.parse(localStorage.getItem("VideoGames"))
                 });
                 console.log("VideoGames difference is: " + diff);
             }
@@ -366,8 +347,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Business") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                            JSON.parse(localStorage.getItem("BusinessAged"))
-                            : JSON.parse(localStorage.getItem("Business"))
+                        JSON.parse(localStorage.getItem("BusinessAged"))
+                        : JSON.parse(localStorage.getItem("Business"))
                 });
                 console.log("Business difference is: " + diff);
             }
@@ -381,8 +362,8 @@ class Content extends React.Component {
             if (localStorage.getItem("Homepage") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                                JSON.parse(localStorage.getItem("HomepageAged"))
-                            : JSON.parse(localStorage.getItem("Homepage"))
+                        JSON.parse(localStorage.getItem("HomepageAged"))
+                        : JSON.parse(localStorage.getItem("Homepage"))
                 });
                 console.log("Homepage difference is: " + diff);
                 // console.log()
@@ -400,7 +381,7 @@ class Content extends React.Component {
             <div className="mainContent">
                 <div className="nav">
                     <Navbar currentPage={this.state.currentPage}
-                        handlePageChange={this.handlePageChange}
+                        handlePageChange={this.sortBy}
                     />
                 </div>
                 <div className="cat">
