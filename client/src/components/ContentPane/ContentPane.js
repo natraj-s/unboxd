@@ -9,7 +9,7 @@ const ContentPane = props => (
             <p>Undefined</p> :
         props.props.map((article, index) => (
                 <Article
-                    key={article.url}
+                    key={article.title}
                     title={article.title}
                     author={article.author}
                     publAt={article.publishedAt}
@@ -19,6 +19,8 @@ const ContentPane = props => (
                     descr={article.description}
                     look={index%2 !== 0 ? "dark" : ""}
                     category={props.category}
+                    currentPage={props.currentPage}
+                    handlePageChange={props.handlePageChange}
                     clicks={article.clicks}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}

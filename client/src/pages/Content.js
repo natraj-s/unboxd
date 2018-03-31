@@ -1,5 +1,6 @@
 import React from "react";
 import API from "../utils/API";
+import Methods from "../utils/Methods";
 import "./Content.css";
 import Navbar from "../components/Navbar";
 import Catbar from "../components/Catbar";
@@ -24,26 +25,7 @@ class Content extends React.Component {
         this.updateContent(cat);
     }
 
-    ageSort = (a, b) => {
-        if (a.publishedAt < b.publishedAt) {
-            return -1;
-        }
-        if (a.publishedAt > b.publishedAt) {
-            return 1;
-        }
-        return 0;
-    }
-
-    newSort = (a, b) => {
-        if (a.publishedAt < b.publishedAt) {
-            return 1;
-        }
-        if (a.publishedAt > b.publishedAt) {
-            return -1;
-        }
-        return 0;
-    }
-
+    
 
     handlePageChange = page => {
         this.setState({ currentPage: page });
@@ -54,10 +36,13 @@ class Content extends React.Component {
                 console.log("original this.state.currentCat ", this.state.currentCat);
                 localStorage.setItem(this.state.currentCat, JSON.stringify(data));
 
-                data.sort(this.ageSort);
+                data.sort(Methods.ageSort);
                 console.log("aged this.state.currentCat ", this.state.currentCat);
 
                 localStorage.setItem(this.state.currentCat + "Aged", JSON.stringify(data));
+
+                data.sort(Methods.clickSort);
+                localStorage.setItem(this.state.currentCat + "Trending", JSON.stringify(data));
                 this.sortBy(page);
             }
             );
@@ -65,7 +50,14 @@ class Content extends React.Component {
 
     sortBy = (order) => {
         console.log("entered");
-        this.setState({ currentPage: order });
+        this.setState({ currentPage: order });        
+        if (order === "Breaking") {
+            console.log("Breaking? ", order);
+            this.setState({
+                content: JSON.parse(localStorage.getItem(this.state.currentCat)),
+                loading: false
+            });
+        }
         if (order === "Aged") {
             this.setState({
                 content: JSON.parse(localStorage.getItem(this.state.currentCat + "Aged")),
@@ -73,10 +65,10 @@ class Content extends React.Component {
             });
 
         }
-        if (order === "Breaking") {
-            console.log("Breaking? ", order);
+        if(order === "Trending") {
+            console.log("Trending? ", order);
             this.setState({
-                content: JSON.parse(localStorage.getItem(this.state.currentCat)),
+                content: JSON.parse(localStorage.getItem(this.state.currentCat + "Trending")),
                 loading: false
             });
         }
@@ -97,7 +89,7 @@ class Content extends React.Component {
             .then(res => {
                 if (res.data === null) {
                     temp = {
-                        key: data.url,
+                        key: data.title,
                         title: data.title,
                         author: data.author,
                         publishedAt: data.publishedAt,
@@ -264,8 +256,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Entertainment") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("EntertainmentAged"))
-                        : JSON.parse(localStorage.getItem("Entertainment"))
+                        JSON.parse(localStorage.getItem("EntertainmentAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("EntertainmentTrending")) :
+                        JSON.parse(localStorage.getItem("Entertainment"))
                 });
                 console.log("Ent difference is: " + diff);
             }
@@ -279,8 +273,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Sports") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("SportsAged"))
-                        : JSON.parse(localStorage.getItem("Sports"))
+                        JSON.parse(localStorage.getItem("SportsAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("SportsTrending")) :
+                        JSON.parse(localStorage.getItem("Sports"))
                 });
                 console.log("Sports difference is: " + diff);
             }
@@ -294,8 +290,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Science") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("ScienceAged"))
-                        : JSON.parse(localStorage.getItem("Science"))
+                        JSON.parse(localStorage.getItem("ScienceAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("ScienceTrending")) :
+                        JSON.parse(localStorage.getItem("Science"))
                 });
                 console.log("Science difference is: " + diff);
             }
@@ -309,8 +307,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Health") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("HealthAged"))
-                        : JSON.parse(localStorage.getItem("Health"))
+                        JSON.parse(localStorage.getItem("HealthAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("HealthTrending")) :
+                        JSON.parse(localStorage.getItem("Health"))
                 });
                 console.log("Health difference is: " + diff);
             }
@@ -324,8 +324,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Tech") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("TechAged"))
-                        : JSON.parse(localStorage.getItem("Tech"))
+                        JSON.parse(localStorage.getItem("TechAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("TechTrending")) :
+                        JSON.parse(localStorage.getItem("Tech"))
                 });
                 console.log("Tech difference is: " + diff);
             }
@@ -339,8 +341,10 @@ class Content extends React.Component {
             if (localStorage.getItem("VideoGames") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("VideoGamesAged"))
-                        : JSON.parse(localStorage.getItem("VideoGames"))
+                        JSON.parse(localStorage.getItem("VideoGamesAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("VideoGameTrending")) :
+                        JSON.parse(localStorage.getItem("VideoGames"))
                 });
                 console.log("VideoGames difference is: " + diff);
             }
@@ -354,8 +358,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Business") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("BusinessAged"))
-                        : JSON.parse(localStorage.getItem("Business"))
+                        JSON.parse(localStorage.getItem("BusinessAged")) :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("BusinessTrending")) :
+                        JSON.parse(localStorage.getItem("Business"))
                 });
                 console.log("Business difference is: " + diff);
             }
@@ -369,8 +375,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Homepage") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("HomepageAged"))
-                        : JSON.parse(localStorage.getItem("Homepage"))
+                        JSON.parse(localStorage.getItem("HomepageAged"))  :
+                        this.state.currentPage === "Trending" ? 
+                        JSON.parse(localStorage.getItem("HomepageTrending")) :
+                        JSON.parse(localStorage.getItem("Homepage"))
                 });
                 console.log("Homepage difference is: " + diff);
                 // console.log()
@@ -400,7 +408,9 @@ class Content extends React.Component {
                 <div className="container">
                     {this.state.loading ? <LoadingWheel /> : 
                         <ContentPane props={this.state.content}
-                        category={this.state.currentCat} />}
+                        category={this.state.currentCat}
+                        currentPage={this.state.currentPage}
+                        handlePageChange={this.sortBy} />}
                     
                 </div>
             </div>

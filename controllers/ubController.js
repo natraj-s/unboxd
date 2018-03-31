@@ -68,5 +68,15 @@ module.exports = {
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    update: function(req, res) {
+        db.Article
+            .update(
+                    { clicks: req.params.clicks },
+                    { where: { title: req.params.title }}
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
-};
+};             
