@@ -23,4 +23,8 @@ router
   .route("/aged/:category")
   .get(ubController.getOldest);
 
+router
+  .route("/clicks/:title/:clicks")
+  .put(ubController.update);
+
 module.exports = router;

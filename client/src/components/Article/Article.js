@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Article.css";
+import API from "../../utils/API";
+import Methods from "../../utils/Methods";
 
 class Article extends Component {
     constructor(props) {
@@ -7,25 +9,30 @@ class Article extends Component {
     }
 
     state = {
-        counter: this.props.clicks
+        clicks: this.props.clicks
     }
 
-    incrementCounter = () => {
-        this.setState({counter: this.state.counter + 1})
-        this.storeCountData();
+    incrementClicks = () => {
+        this.setState({clicks: this.state.clicks + 1})
+        this.storeClicksData();
     }
 
-    storeCountData = () => {     
+    storeClicksData = () => {     
         let data = JSON.parse(localStorage.getItem(this.props.category));
 
-        data.articles.forEach(element => {
+        data.forEach(element => {
             if(element.title === this.props.title) {
-                element.counter = parseInt(element.counter, 10) + 1;
-                this.setState({ counter: element.counter });
+                element.clicks = parseInt(element.clicks, 10) + 1;
+                this.setState({ clicks: element.clicks });
+                API.updateClicks(element.title, element.clicks).then(res=> {
+                });
             }
         });
 
         localStorage.setItem(this.props.category, JSON.stringify(data));
+        localStorage.setItem(this.props.category+"Aged", JSON.stringify(data.sort(Methods.ageSort)));
+        localStorage.setItem(this.props.category+"Trending", JSON.stringify(data.sort(Methods.clickSort)));
+        this.props.handlePageChange(this.props.currentPage);
     }
 
     render() {
@@ -45,7 +52,7 @@ class Article extends Component {
                                 <div className="title">
                                     <div className="image" style={{ backgroundImage: `url(${this.props.img})` }} title={this.props.title}>
                                     </div>
-                                    <span className="artTitle"><a onClick={this.incrementCounter} href={this.props.url} target="_blank">{this.props.title}</a></span>
+                                    <span className="artTitle"><a onClick={this.incrementClicks} href={this.props.url} target="_blank">{this.props.title}</a></span>
                                 </div>
                                 <div className="source">
                                     <p>
@@ -56,7 +63,7 @@ class Article extends Component {
                                             <label id="publatlabel">POSTED AT: </label>{this.props.publAt}
                                         </span>
                                         <span>
-                                            <label id="clickslabel">CLICKS: </label> {this.state.counter}
+                                            <label id="clickslabel">CLICKS: </label> {this.state.clicks}
                                         </span>
                                         <span>
                                             <label id="commentslabel">COMMENTS: </label> 0

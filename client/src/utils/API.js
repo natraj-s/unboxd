@@ -65,6 +65,10 @@ export default {
 
     ifExists: function(title) {
         return axios.get("/api/unboxd/" + title);
+    },
+
+    updateClicks: function(title, clicks) {
+        return axios.put("api/unboxd/clicks/" + title + "/" + clicks);
     }
     
 
