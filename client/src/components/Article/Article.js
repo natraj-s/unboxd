@@ -33,6 +33,7 @@ class Article extends Component {
         localStorage.setItem(this.props.category+"Aged", JSON.stringify(data.sort(Methods.ageSort)));
         localStorage.setItem(this.props.category+"Trending", JSON.stringify(data.sort(Methods.clickSort)));
         this.props.handlePageChange(this.props.currentPage);
+        console.log("test");
     }
 
     render() {
