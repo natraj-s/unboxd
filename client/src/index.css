@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,600');
+@import url('https://fonts.googleapis.com/css?family=Abel');
+
 body {
   margin: 0;
   padding: 0;
@@ -24,6 +26,7 @@ body {
   background: -webkit-linear-gradient(45deg, #ff5f6d 0%,#ffc371 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(45deg, #ff5f6d 0%,#ffc371 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff5f6d', endColorstr='#ffc371',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  min-height: 75vh;
 }
 
 a {

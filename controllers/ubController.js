@@ -59,6 +59,24 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+    createUser: function(req, res) {
+        db.User
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    findUser: function(req, res) {
+        db.User
+            .find({
+                where: {
+                    username: req.params.username
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
     ifExists: function(req, res) {
         db.Article
             .find({

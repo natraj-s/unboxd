@@ -1,0 +1,44 @@
+.loginComponent {
+    margin-top: 20px;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.header {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+.loginSection, .signupSection {
+    padding-top: 25px;
+}
+
+.user-form-group, .email-form-group, 
+.pwd-form-group, .rptpwd-form-group{
+    margin: 0 auto;
+    width: 75%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#loginusername, #loginpassword,
+#suusername, #suemail, #supwd, #supwdrpt {
+    text-align: center;
+    font-size: 14px;
+}
+
+#loginInfo .error {
+    padding-top: 10px;
+}
+
+.error {
+    color: rgb(189, 27, 27);
+}
+
+.login-footer, .signup-footer {
+    padding-top: 10px;
+}
+
+h4 {
+    font-family: 'Quicksand', sans-serif;
+}

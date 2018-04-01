@@ -55,6 +55,15 @@ export default {
         return axios.post("/api/unboxd/", data);
     },
 
+    createUser: function(data) {
+        console.log("data from API.js ", data);
+        return axios.post("/api/unboxd/signup", data);
+    },
+
+    findUser: function(username) {
+        return axios.get("/api/unboxd/finduser/" + username);
+    },
+
     getLatest: function(category) {
         return axios.get("/api/unboxd/breaking/"+ category);
     },
@@ -64,7 +73,7 @@ export default {
     },
 
     ifExists: function(title) {
-        return axios.get("/api/unboxd/" + title);
+        return axios.get("/api/unboxd/articles/" + title);
     },
 
     updateClicks: function(title, clicks) {

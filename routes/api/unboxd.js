@@ -8,7 +8,7 @@ router
   .post(ubController.create);
 
 router
-  .route("/:title")
+  .route("/articles/:title")
   .get(ubController.ifExists);
 
 router
@@ -26,5 +26,13 @@ router
 router
   .route("/clicks/:title/:clicks")
   .put(ubController.update);
+
+router
+  .route("/signup")
+  .post(ubController.createUser);
+
+router
+  .route("/finduser/:username")
+  .get(ubController.findUser);
 
 module.exports = router;
