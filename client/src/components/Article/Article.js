@@ -9,7 +9,8 @@ class Article extends Component {
     }
 
     state = {
-        clicks: this.props.clicks
+        clicks: this.props.clicks,
+        hidden: false
     }
 
     incrementClicks = () => {
@@ -34,6 +35,11 @@ class Article extends Component {
         localStorage.setItem(this.props.category+"Trending", JSON.stringify(data.sort(Methods.clickSort)));
         this.props.handlePageChange(this.props.currentPage);
         console.log("test");
+    }
+
+    hideThis = () => {
+        this.state.hidden ? this.setState({hidden: false}) : this.setState({hidden: true});    
+        // console.log("this")        ;
     }
 
     render() {
@@ -75,13 +81,14 @@ class Article extends Component {
                             </div>
 
                             <div className="artBody">
-                                {/* <p className={this.props.hidden === "true" ? "hidden" : ""}> */}
-                                <p>
+                                <p className={this.state.hidden ? "hidden" : ""}>
                                     {this.props.descr}
                                 </p>
+
                                 <div className="misc">
-                                    {/* <span onClick={() => props.hidden === "true" ? props.isHidden("false") : props.isHidden("true")} */}
-                                    <span className="oi oi-chevron-top"></span>
+                                    {/* <span  */}
+                                    <span onClick={this.hideThis} 
+                                        className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
                                 </div>
                             </div>
                         </div>
