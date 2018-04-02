@@ -10,6 +10,7 @@ router
 router
   .route("/articles/:title")
   .get(ubController.ifExists);
+  
 
 router
   .route("/trending")
