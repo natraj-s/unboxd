@@ -21,7 +21,9 @@ class Login extends React.Component {
         supwdMsg: "",
         suusernameValid: false,
         suemailValid: false,
-        supwdValid: false
+        supwdValid: false,
+        signuploading: false,
+        signupsuccess: false
     }
 
     handleLoginUsername = event => {
@@ -116,21 +118,26 @@ class Login extends React.Component {
         if (!this.state.suusernameValid) { this.checkUser(); }
         if (!this.state.supwdValid) { this.checkPassword(); }
         if (this.state.suusernameValid && this.state.supwdValid) {
+            this.setState({
+                signuploading: true                            
+            });
             console.log("valid details ");
-            var user = {
+            let user = {
                 username: this.state.suusername,
                 email: this.state.suemail,
                 password: this.state.supassword
-            }
+            };
 
             API.createUser(user)
                 .then(res => {
                     console.log("from handlesubmit ", res.data);
                     this.resetState();
-                    this.props.history.push("/loggedin");
+                    this.setState({
+                        signupsuccess: true,
+                        signuploading: false
+                    });
                 });
         }
-
     }
 
     handleLogin = event => {
@@ -146,11 +153,24 @@ class Login extends React.Component {
                         this.setState({ loginMsg: "No such username exists" });
                     }
                     else {
-                        if(this.state.loginpwd === "") {
+                        if (this.state.loginpwd === "") {
                             this.setState({ loginMsg: "Please enter a password" });
                         }
                         else {
-                            this.setState({ loginMsg: "" });
+                            let user = {
+                                username: this.state.loginusername,
+                                password: this.state.loginpwd
+                            }
+
+                            API.handleLogin(user)
+                                .then(res => {                                    
+                                        this.setState({ loginMsg: "" });
+                                        console.log("from handlelogin ", res.data);
+                                        this.props.history.push("/loggedin");
+                                    })
+                                .catch(error => {
+                                    this.setState({loginMsg: "Wrong Password. Please try again!"});
+                                });
                         }
                     }
                 });
@@ -235,7 +255,28 @@ class Login extends React.Component {
                             </p>
                         </div>
                         <div className="signup-footer">
-                            <button className="btn btn-primary btn-dark signupSubmit">SIGNUP</button>
+                            <div className={this.state.signuploading ? "sk-circle" : "sk-circle hidden"}>
+                                <div className="sk-circle1 sk-child"></div>
+                                <div className="sk-circle2 sk-child"></div>
+                                <div className="sk-circle3 sk-child"></div>
+                                <div className="sk-circle4 sk-child"></div>
+                                <div className="sk-circle5 sk-child"></div>
+                                <div className="sk-circle6 sk-child"></div>
+                                <div className="sk-circle7 sk-child"></div>
+                                <div className="sk-circle8 sk-child"></div>
+                                <div className="sk-circle9 sk-child"></div>
+                                <div className="sk-circle10 sk-child"></div>
+                                <div className="sk-circle11 sk-child"></div>
+                                <div className="sk-circle12 sk-child"></div>
+                            </div>
+                            <p className={!this.state.signupsuccess ? "success hidden" : "success"}>
+                                <span className="oi oi-arrow-thick-left"></span>SUCCESS. PLEASE LOGIN IN!
+                            </p>
+                            <button className={(this.state.signupsuccess || this.state.signuploading) ? 
+                                    "btn btn-primary btn-dark signupSubmit hidden" : 
+                                    "btn btn-primary btn-dark signupSubmit"}>
+                                    SIGNUP
+                            </button>
                         </div>
                     </form>
                 </div>
