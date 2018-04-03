@@ -3,15 +3,28 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
+var passport = require("passport");
+var session = require("express-session");
 const PORT = process.env.PORT || 3001;
 
 var db = require("./models");
+
+var localpassport = require("./config/passport/passport.js")(passport, db.User);
 
 // Configure body parser for AJAX requests
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Serve up static assets
 app.use(express.static("client/build"));
+
+app.use(session({
+  secret: "keyboard cat",
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+
 // Add routes, both API and view
 app.use(routes);
 
