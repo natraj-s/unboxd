@@ -83,8 +83,16 @@ export default {
         return axios.get("/api/unboxd/articles/" + title);
     },
 
+    getClicks: function(title) {
+        return axios.get("/api/unboxd/clicks/" + title);
+    },
+
     updateClicks: function(title, clicks) {
-        return axios.put("api/unboxd/clicks/" + title + "/" + clicks);
+        return axios.put("/api/unboxd/clicks/" + title + "/" + clicks);
+    },
+
+    updateLikes: function(title, updated) {
+        return axios.put("/api/unboxd/likes/" + title + "/" + updated);
     }
     
 

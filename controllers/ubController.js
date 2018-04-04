@@ -96,5 +96,27 @@ module.exports = {
             )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    getLikes: function(req, res) {
+        console.log('reached here ', req.params);
+        db.Article
+            .findOne(
+                 
+                { where: { title: req.params.title }}
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    updateLikes: function(req, res) {
+        
+        db.Article
+            .update(
+                    { likes: req.params.updated },
+                    { where: { title: req.params.title }}
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };             

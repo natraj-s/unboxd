@@ -1,3 +1,4 @@
+User = require("./User");
 
 module.exports = function(sequelize, Sequelize) {
 
@@ -50,11 +51,19 @@ module.exports = function(sequelize, Sequelize) {
             type: Sequelize.STRING
           },
 
+          likes: {
+            type: Sequelize.TEXT
+          },
+
           comments: {
             type: Sequelize.STRING
           }
     });
 
+    // Article.associate = function(models) {
+    //   models.Article.hasMany(models.User, { as: "Users", foreignKey: "key"} );
+    // }
+    
     Article.sync();
     return Article;
 }

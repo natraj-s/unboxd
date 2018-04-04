@@ -35,7 +35,7 @@ class Login extends React.Component {
     }
 
     handleUsername = event => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         this.setState({ suusername: event.target.value });
     }
 
@@ -47,7 +47,7 @@ class Login extends React.Component {
         this.setState({ supassword: event.target.value });
 
         if (event.target.value !== this.state.surptpwd) {
-            console.log("checking in handle as well");
+            // console.log("checking in handle as well");
             this.setState({ supwdMsg: "Passwords don't match", supwdValid: false });
         }
     }
@@ -79,15 +79,15 @@ class Login extends React.Component {
 
     checkPassword = event => {
         if (event !== undefined) {
-            console.log("heyah");
+            // console.log("heyah");
             this.setState({ surptpwd: event.target.value });
 
             if (this.state.supassword !== event.target.value) {
-                console.log("checking");
+                // console.log("checking");
                 this.setState({ supwdMsg: "Passwords don't match", supwdValid: false });
             }
             else {
-                console.log("checked");
+                // console.log("checked");
                 this.setState({
                     supwdMsg: "",
                     supwdValid: true
@@ -108,7 +108,7 @@ class Login extends React.Component {
             });
         }
         else {
-            console.log("came here");
+            // console.log("came here");
             return;
         }
     }
@@ -119,9 +119,9 @@ class Login extends React.Component {
         if (!this.state.supwdValid) { this.checkPassword(); }
         if (this.state.suusernameValid && this.state.supwdValid) {
             this.setState({
-                signuploading: true                            
+                signuploading: true
             });
-            console.log("valid details ");
+            // console.log("valid details ");
             let user = {
                 username: this.state.suusername,
                 email: this.state.suemail,
@@ -130,7 +130,7 @@ class Login extends React.Component {
 
             API.createUser(user)
                 .then(res => {
-                    console.log("from handlesubmit ", res.data);
+                    // console.log("from handlesubmit ", res.data);
                     this.resetState();
                     this.setState({
                         signupsuccess: true,
@@ -149,7 +149,7 @@ class Login extends React.Component {
             API.findUser(this.state.loginusername)
                 .then(res => {
                     if (res.data === null) {
-                        console.log("here");
+                        // console.log("here");
                         this.setState({ loginMsg: "No such username exists" });
                     }
                     else {
@@ -163,13 +163,16 @@ class Login extends React.Component {
                             }
 
                             API.handleLogin(user)
-                                .then(res => {                                    
-                                        this.setState({ loginMsg: "" });
-                                        console.log("from handlelogin ", res.data);
-                                        this.props.history.push("/loggedin");
-                                    })
+                                .then(res => {
+                                    this.setState({ loginMsg: "" });
+                                    this.props.handleLoginChange("true");
+                                    console.log("from handlelogin ", this.props);
+                                    localStorage.setItem("__u", this.state.loginusername);
+                                    this.props.history.push("/loggedin");
+                                })
                                 .catch(error => {
-                                    this.setState({loginMsg: "Wrong Password. Please try again!"});
+                                    console.log("error ", error);
+                                    this.setState({ loginMsg: "Wrong Password. Please try again!" });
                                 });
                         }
                     }
@@ -272,10 +275,10 @@ class Login extends React.Component {
                             <p className={!this.state.signupsuccess ? "success hidden" : "success"}>
                                 <span className="oi oi-arrow-thick-left"></span>SUCCESS. PLEASE LOGIN IN!
                             </p>
-                            <button className={(this.state.signupsuccess || this.state.signuploading) ? 
-                                    "btn btn-primary btn-dark signupSubmit hidden" : 
-                                    "btn btn-primary btn-dark signupSubmit"}>
-                                    SIGNUP
+                            <button className={(this.state.signupsuccess || this.state.signuploading) ?
+                                "btn btn-primary btn-dark signupSubmit hidden" :
+                                "btn btn-primary btn-dark signupSubmit"}>
+                                SIGNUP
                             </button>
                         </div>
                     </form>

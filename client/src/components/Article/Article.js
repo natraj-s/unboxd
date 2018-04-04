@@ -10,37 +10,89 @@ class Article extends Component {
 
     state = {
         clicks: this.props.clicks,
+        liked: false,
         hidden: false
     }
 
     incrementClicks = () => {
-        this.setState({clicks: this.state.clicks + 1})
+        this.setState({ clicks: this.state.clicks + 1 })
         this.storeClicksData();
     }
 
-    storeClicksData = () => {     
+    componentDidMount = () => {
+        this.isLiked();
+    }
+
+    storeClicksData = () => {
         let data = JSON.parse(localStorage.getItem(this.props.category));
 
         data.forEach(element => {
-            if(element.title === this.props.title) {
+            if (element.title === this.props.title) {
                 element.clicks = parseInt(element.clicks, 10) + 1;
                 this.setState({ clicks: element.clicks });
-                API.updateClicks(element.title, element.clicks).then(res=> {
+                API.updateClicks(element.title, element.clicks).then(res => {
                 });
             }
         });
 
         localStorage.setItem(this.props.category, JSON.stringify(data));
-        localStorage.setItem(this.props.category+"Aged", JSON.stringify(data.sort(Methods.ageSort)));
-        localStorage.setItem(this.props.category+"Trending", JSON.stringify(data.sort(Methods.clickSort)));
+        localStorage.setItem(this.props.category + "Aged", JSON.stringify(data.sort(Methods.ageSort)));
+        localStorage.setItem(this.props.category + "Trending", JSON.stringify(data.sort(Methods.clickSort)));
         this.props.handlePageChange(this.props.currentPage);
         console.log("test");
     }
 
     hideThis = () => {
-        this.state.hidden ? this.setState({hidden: false}) : this.setState({hidden: true});    
+        this.state.hidden ? this.setState({ hidden: false }) : this.setState({ hidden: true });
         // console.log("this")        ;
     }
+
+    updateLikes = () => {
+        console.log("updateLikes", this.props.title, localStorage.getItem("__u"));
+        let user = localStorage.getItem("__u");
+
+        API.ifExists(this.props.title).then(res => {
+            let currentLikes = res.data.likes;
+            // console.log(currentLikes);
+
+            if (currentLikes === null) {
+                currentLikes = user + ";"
+                this.setState({ liked: true });
+                API.updateLikes(this.props.title, currentLikes)
+                    .then(res => {
+                        console.log("dun");
+                    });
+            }
+            else {
+                if (currentLikes.search(user) === -1) {
+                    currentLikes += user + ";"
+                    this.setState({ liked: true });
+                    API.updateLikes(this.props.title, currentLikes)
+                        .then(res => {
+                            console.log("dun");
+                        });
+                }
+            }
+        });
+
+        // need to update localstorage as well
+    }
+
+    isLiked = () => {
+        if(this.props.likes) {
+            let trimmed = this.props.likes.slice(0, -1);
+            let likeArr = trimmed.split(";");
+            // console.log(likeArr);
+            if(likeArr.indexOf(localStorage.getItem("__u")) !== -1) {
+                // console.log("yes");
+                this.setState({ liked: true });
+            }
+        }
+    }
+
+   // Need a find all likes function which gets all the like columns, parses through
+   // each of the strings, if it finds the current user, then adds that article
+   // to array, continue onto next;    
 
     render() {
         return (
@@ -75,6 +127,14 @@ class Article extends Component {
                                         <span>
                                             <label id="commentslabel">COMMENTS: </label> 0
                                         </span>
+                                        <span>
+                                            <span className={!localStorage.getItem("__u") ?
+                                                "oi oi-thumb-up hidden" :
+                                                this.state.liked ? "oi oi-thumb-up liked" :
+                                                    "oi oi-thumb-up"} onClick={this.updateLikes}>
+                                            </span>
+                                        </span>
+
 
                                     </p>
                                 </div>
@@ -87,7 +147,7 @@ class Article extends Component {
 
                                 <div className="misc">
                                     {/* <span  */}
-                                    <span onClick={this.hideThis} 
+                                    <span onClick={this.hideThis}
                                         className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
                                 </div>
                             </div>

@@ -260,3 +260,8 @@ p {
 .oi {
     cursor: pointer;
 }
+
+.liked {
+    font-size: 16px;
+    color: #43cea2; /* Old browsers */
+}
