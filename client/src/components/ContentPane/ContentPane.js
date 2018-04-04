@@ -4,7 +4,7 @@ import "./ContentPane.css";
 
 const ContentPane = props => (
     <div className="container-fluid contentArea">
-        {console.log(props)}
+        {/* {console.log(props)} */}
         {!props.props ?
             <p>Undefined</p> :
         props.props.map((article, index) => (
@@ -22,6 +22,8 @@ const ContentPane = props => (
                     currentPage={props.currentPage}
                     handlePageChange={props.handlePageChange}
                     clicks={article.clicks}
+                    likes={article.likes}
+                    isLoggedIn={props.isLoggedIn}
                 // hidden={this.state.hidden}
                 // isHidden={this.isHidden}
                 />

@@ -24,7 +24,6 @@ class Content extends React.Component {
         this.setState({ currentCat: cat });
         this.updateContent(cat);
     }
-
     
 
     handlePageChange = page => {
@@ -99,6 +98,7 @@ class Content extends React.Component {
                         description: data.description,
                         category: category,
                         clicks: "0",
+                        likes: data.clicks,
                         comments: "0"
                     }
 
@@ -392,6 +392,7 @@ class Content extends React.Component {
 
     render() {
         // console.log(this.state.content);
+        // console.log("isLoggedIn: " , this.props.isLoggedIn);
         return (
             <div className="mainContent">
                 <div className="nav">
@@ -410,7 +411,8 @@ class Content extends React.Component {
                         <ContentPane props={this.state.content}
                         category={this.state.currentCat}
                         currentPage={this.state.currentPage}
-                        handlePageChange={this.sortBy} />}
+                        handlePageChange={this.sortBy}
+                        isLoggedIn={this.props.isLoggedIn} />}
                     
                 </div>
             </div>

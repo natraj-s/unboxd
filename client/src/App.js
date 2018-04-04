@@ -12,17 +12,26 @@ import Userpage from "./pages/Userpage";
 class App extends Component {
 
   state = {
+    isLoggedIn: false
   };
 
+  handleLoginChange = status => {
+    console.log("in handle login change");
+    this.setState({ isLoggedIn: status });
+  }
+
   render() {
+    console.log("here ", this.state.isLoggedIn);
     return (
       <Router>
       <div className="App">
         <div className="container mainContainer">
-        <Logo />
+        <Logo isLoggedIn={this.state.isLoggedIn} />
         <Switch>
-        <Route exact path="/" component={Content} />
-        <Route exact path="/login" component={Login} />
+        <Route exact path="/" render={() => (<Content isLoggedIn={this.state.isLoggedIn} />)} />
+        <Route exact path="/login" render={(props) => <Login isLoggedIn={this.state.isLoggedIn} 
+                                        handleLoginChange={this.handleLoginChange}{...props} />} />
+        {/* <Route exact path="/login" component={Login} /> */}
         <Route exact path="/loggedin" component={Userpage} />
         </Switch>
       </div>

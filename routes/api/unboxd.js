@@ -29,6 +29,11 @@ router
   .route("/clicks/:title/:clicks")
   .put(ubController.update);
 
+router
+  .route("/likes/:title?/:updated")
+  .get(ubController.getLikes)
+  .put(ubController.updateLikes);
+
 // router
 //   .route("/signup")
 //   .post(ubController.createUser);

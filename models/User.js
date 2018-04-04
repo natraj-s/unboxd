@@ -1,6 +1,8 @@
 // Dependencies
 // =============================================================
 
+Article = require("./Article");
+
 module.exports = function(sequelize, Sequelize) {
 
     // Creates a "Login" model that matches up with DB
@@ -39,7 +41,8 @@ module.exports = function(sequelize, Sequelize) {
         timestamps: false
     });
     
-    
+    // User.belongsTo(Article, {foreignKey: "articleKey"} );
+    User.sync();
     return User;
 }
     
