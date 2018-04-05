@@ -15,6 +15,7 @@ class Article extends Component {
     }
 
     incrementClicks = () => {
+        console.log(this.props.category);
         this.setState({ clicks: this.state.clicks + 1 })
         this.storeClicksData();
     }
@@ -23,7 +24,7 @@ class Article extends Component {
         this.isLiked();
     }
 
-    storeClicksData = () => {
+    storeClicksData = () => {    
         let data = JSON.parse(localStorage.getItem(this.props.category));
 
         data.forEach(element => {
@@ -48,51 +49,69 @@ class Article extends Component {
     }
 
     updateLikes = () => {
-        console.log("updateLikes", this.props.title, localStorage.getItem("__u"));
         let user = localStorage.getItem("__u");
+        let likes = localStorage.getItem("__uLikes");
+        let articleId = this.props.id;
 
-        API.ifExists(this.props.title).then(res => {
-            let currentLikes = res.data.likes;
-            // console.log(currentLikes);
+        let userLikes = {
+            userName: user,
+            articleId: articleId
+        }
 
-            if (currentLikes === null) {
-                currentLikes = user + ";"
-                this.setState({ liked: true });
-                API.updateLikes(this.props.title, currentLikes)
-                    .then(res => {
-                        console.log("dun");
-                    });
+        // check if user hasn't already liked this article
+        // and only then add it to the database
+        if (likes.indexOf(articleId) === -1) {
+            console.log("here");
+            this.setState({ liked: true });
+            API.updateLikes(userLikes)
+                .then(res => {
+                    likes = likes.slice(0, -1);
+                    let articleObj = {
+                        "articleId": '' + articleId + ''
+                    }
+                    if(likes.length > 2) {
+                        likes += ",";
+                    }
+                    likes += JSON.stringify(articleObj) + "]";
+                    localStorage.setItem("__uLikes", likes);
+                });
+        }
+        else {
+            this.setState({ liked: false });
+            let fullStr = '{"articleId":"' + articleId + '"}';
+            console.log("likes ", likes);
+            console.log("fullstr ", fullStr);
+
+            if(likes.indexOf(fullStr) !== 1) {
+                fullStr = "," + fullStr;
+                console.log("fullstr not first ", fullStr);
             }
             else {
-                if (currentLikes.search(user) === -1) {
-                    currentLikes += user + ";"
-                    this.setState({ liked: true });
-                    API.updateLikes(this.props.title, currentLikes)
-                        .then(res => {
-                            console.log("dun");
-                        });
+                if(likes.length !== fullStr.length + 2) {
+                    fullStr = fullStr + ",";
                 }
+                console.log("fullstr first ", fullStr);
             }
-        });
+            likes = likes.replace(fullStr, "");
+            console.log(likes);
+            localStorage.setItem("__uLikes", likes);
+
+            API.unlikeFromUser(user, articleId);            
+        }
 
         // need to update localstorage as well
     }
 
     isLiked = () => {
-        if(this.props.likes) {
-            let trimmed = this.props.likes.slice(0, -1);
-            let likeArr = trimmed.split(";");
-            // console.log(likeArr);
-            if(likeArr.indexOf(localStorage.getItem("__u")) !== -1) {
-                // console.log("yes");
-                this.setState({ liked: true });
-            }
+        let temp = localStorage.getItem("__uLikes");
+        if (temp != null && temp.indexOf(this.props.id) !== -1) {
+            this.setState({ liked: true })
         }
     }
 
-   // Need a find all likes function which gets all the like columns, parses through
-   // each of the strings, if it finds the current user, then adds that article
-   // to array, continue onto next;    
+    // Need a find all likes function which gets all the like columns, parses through
+    // each of the strings, if it finds the current user, then adds that article
+    // to array, continue onto next;    
 
     render() {
         return (
@@ -111,7 +130,8 @@ class Article extends Component {
                                 <div className="title">
                                     <div className="image" style={{ backgroundImage: `url(${this.props.img})` }} title={this.props.title}>
                                     </div>
-                                    <span className="artTitle"><a onClick={this.incrementClicks} href={this.props.url} target="_blank">{this.props.title}</a></span>
+                                    <span className="artTitle"><a onClick={this.props.page === "mainpage" ? 
+                                            this.incrementClicks : null} href={this.props.url} target="_blank">{this.props.title}</a></span>
                                 </div>
                                 <div className="source">
                                     <p>
@@ -121,7 +141,7 @@ class Article extends Component {
                                         <span>
                                             <label id="publatlabel">POSTED AT: </label>{this.props.publAt}
                                         </span>
-                                        <span>
+                                        <span className={this.props.page === "userpage" ? "hidden" : ""}>
                                             <label id="clickslabel">CLICKS: </label> {this.state.clicks}
                                         </span>
                                         <span>

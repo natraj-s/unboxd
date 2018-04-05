@@ -2,69 +2,68 @@ User = require("./User");
 
 module.exports = function(sequelize, Sequelize) {
 
-    var Article = sequelize.define("Article", {
-        
-        id: {
-            autoIncrement: true,
-            primaryKey: true,
-            type: Sequelize.INTEGER
-          },
+  var Article = sequelize.define("Article", {
 
-          key: {
-            type: Sequelize.STRING,
-            unique: true
-          },
-        
-          title: {
-            type: Sequelize.STRING
-          },
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER
+    },
 
-          author: {
-            type: Sequelize.STRING
-          },
+    key: {
+      type: Sequelize.STRING,
+      unique: true
+    },
 
-          publishedAt: {
-            type: Sequelize.STRING
-          },
+    title: {
+      type: Sequelize.STRING
+    },
 
-          source: {
-            type: Sequelize.STRING
-          },
+    author: {
+      type: Sequelize.STRING
+    },
 
-          url: {
-            type: Sequelize.TEXT("medium")
-          },
+    publishedAt: {
+      type: Sequelize.STRING
+    },
 
-          urlToImage: {
-            type: Sequelize.TEXT('medium')
-          },
+    source: {
+      type: Sequelize.STRING
+    },
 
-          description: {
-            type: Sequelize.TEXT("long")
-          },
+    url: {
+      type: Sequelize.TEXT("medium")
+    },
 
-          category: {
-            type: Sequelize.STRING
-          },
+    urlToImage: {
+      type: Sequelize.TEXT('medium')
+    },
 
-          clicks: {
-            type: Sequelize.STRING
-          },
+    description: {
+      type: Sequelize.TEXT("long")
+    },
 
-          likes: {
-            type: Sequelize.TEXT
-          },
+    category: {
+      type: Sequelize.STRING
+    },
 
-          comments: {
-            type: Sequelize.STRING
-          }
-    });
+    clicks: {
+      type: Sequelize.STRING
+    },
 
-    // Article.associate = function(models) {
-    //   models.Article.hasMany(models.User, { as: "Users", foreignKey: "key"} );
-    // }
-    
-    Article.sync();
-    return Article;
+    comments: {
+      type: Sequelize.STRING
+    }
+  });
+
+  // Article.associate = function(models) {
+  //   models.Article.hasMany(models.User,
+  //     {
+  //       foreignKey: "id"
+  //     });
+  // }
+
+  Article.sync();
+
+  return Article;
 }
-    

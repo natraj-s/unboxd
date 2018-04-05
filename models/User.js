@@ -37,11 +37,17 @@ module.exports = function(sequelize, Sequelize) {
       resettoken: {
         type: Sequelize.STRING
       }
+      
     }, {
         timestamps: false
     });
     
-    // User.belongsTo(Article, {foreignKey: "articleKey"} );
+    // User.associate = function(models) {
+    //   models.User.belongsTo(models.Article,  { 
+    //     foreignKey: "id"
+    //   });
+    // }
+
     User.sync();
     return User;
 }

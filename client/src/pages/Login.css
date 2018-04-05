@@ -55,9 +55,48 @@ h4 {
     font-family: "Abel", sans-serif;
     font-weight: 600;
     line-height: 1;
-    font-size: 18px;
-    color: green;
+    font-size: 20px;
+    color: #72e093;
+    text-shadow: 2px 2px 8px #000000;
 }
+
+.loginLoader {
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: #f5f5f5;
+}
+
+.loginLoader hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* Credit to https://codepen.io/thetallweeks/pen/yybGra */
+
+.loadingMsg:after {
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: bottom;
+    -webkit-animation: ellipsis steps(4,end) 900ms infinite;      
+    animation: ellipsis steps(4,end) 900ms infinite;
+    content: "\2026"; /* ascii code for the ellipsis character */
+    width: 0px;
+  }
+  
+  @keyframes ellipsis {
+    to {
+      width: 1.25em;    
+    }
+  }
+  
+  @-webkit-keyframes ellipsis {
+    to {
+      width: 1.25em;    
+    }
+  }
+
 
 /* Credits of http://tobiasahlin.com/spinkit/ */
 
