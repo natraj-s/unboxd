@@ -412,7 +412,8 @@ class Content extends React.Component {
                         category={this.state.currentCat}
                         currentPage={this.state.currentPage}
                         handlePageChange={this.sortBy}
-                        isLoggedIn={this.props.isLoggedIn} />}
+                        isLoggedIn={this.props.isLoggedIn}
+                        page="mainpage" />}
                     
                 </div>
             </div>

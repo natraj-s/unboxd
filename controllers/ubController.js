@@ -1,4 +1,6 @@
 const db = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Defining methods for the ubController
 module.exports = {
@@ -6,6 +8,24 @@ module.exports = {
         console.log("came here");
         db.Article
             .findAll()
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    findById: function(req, res) {
+        console.log("findbyid ", req.params.id);
+        let temp = req.params.id.split(",");
+        db.Article
+            .findAll({
+                where: {
+                    id: {
+                        [Op.in]: temp
+                    }
+                },
+                order: [
+                    ['updatedAt', 'DESC']
+                ]                
+            })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -99,23 +119,50 @@ module.exports = {
     },
 
     getLikes: function(req, res) {
-        console.log('reached here ', req.params);
-        db.Article
-            .findOne(
-                 
-                { where: { title: req.params.title }}
+        db.UserLikes
+            .find(             
+                { where: 
+                    { 
+                        userName: req.params.username,
+                        articleId: req.params.articleId
+                    }
+                }
             )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
 
-    updateLikes: function(req, res) {
-        
-        db.Article
-            .update(
-                    { likes: req.params.updated },
-                    { where: { title: req.params.title }}
+    deleteLikes: function(req, res) {
+        db.UserLikes
+            .destroy(
+                { where: 
+                    { 
+                        userName: req.params.username,
+                        articleId: req.params.articleId
+                    }
+                }
             )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    getLikesByUser: function(req, res) {
+        db.UserLikes
+            .findAll(
+                {attributes: ['articleId'], 
+                where:
+                    {
+                        userName: req.params.username
+                    }
+                }                
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
+    updateLikes: function(req, res) {        
+        db.UserLikes
+            .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     }

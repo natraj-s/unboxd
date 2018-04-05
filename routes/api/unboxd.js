@@ -11,7 +11,10 @@ router
 router
   .route("/articles/:title")
   .get(ubController.ifExists);
-  
+
+router
+  .route("/articlesbyid/:id")
+  .get(ubController.findById);
 
 router
   .route("/trending")
@@ -30,9 +33,17 @@ router
   .put(ubController.update);
 
 router
-  .route("/likes/:title?/:updated")
+  .route("/likes/:username/:articleId")
   .get(ubController.getLikes)
-  .put(ubController.updateLikes);
+  .delete(ubController.deleteLikes);
+
+router
+  .route("/likesbyuser/:username")
+  .get(ubController.getLikesByUser);
+
+router
+  .route("/updatelikes/")
+  .post(ubController.updateLikes);
 
 // router
 //   .route("/signup")

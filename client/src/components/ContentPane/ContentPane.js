@@ -7,9 +7,10 @@ const ContentPane = props => (
         {/* {console.log(props)} */}
         {!props.props ?
             <p>Undefined</p> :
-        props.props.map((article, index) => (
+        props.props.map((article, index) => ( props.page === "mainpage" ?
                 <Article
-                    key={article.title}
+                    key={article.id}
+                    id={article.id}
                     title={article.title}
                     author={article.author}
                     publAt={article.publishedAt}
@@ -24,8 +25,22 @@ const ContentPane = props => (
                     clicks={article.clicks}
                     likes={article.likes}
                     isLoggedIn={props.isLoggedIn}
-                // hidden={this.state.hidden}
-                // isHidden={this.isHidden}
+                    page={props.page}
+                /> : 
+                <Article
+                    key={article.id}
+                    id={article.id}
+                    title={article.title}
+                    author={article.author}
+                    publAt={article.publishedAt}
+                    source={article.source}
+                    url={article.url}
+                    img={article.urlToImage}
+                    descr={article.description}
+                    look={index%2 !== 0 ? "dark" : ""}
+                    category={article.category}
+                    clicks={article.clicks}
+                    page={props.page}                    
                 />
             ))}
     </div>

@@ -83,6 +83,10 @@ export default {
         return axios.get("/api/unboxd/articles/" + title);
     },
 
+    getById: function(userId) {
+        return axios.get("/api/unboxd/articlesbyid/" + userId);
+    },
+
     getClicks: function(title) {
         return axios.get("/api/unboxd/clicks/" + title);
     },
@@ -91,9 +95,20 @@ export default {
         return axios.put("/api/unboxd/clicks/" + title + "/" + clicks);
     },
 
-    updateLikes: function(title, updated) {
-        return axios.put("/api/unboxd/likes/" + title + "/" + updated);
+    getLikes: function(username, articleId) {
+        return axios.get("/api/unboxd/likes/" + username + "/" + articleId);
+    },
+
+    unlikeFromUser: function(username, articleId) {
+        return axios.delete("/api/unboxd/likes/" + username + "/" + articleId);
+    },
+    
+    getLikesByUser: function(username) {
+        return axios.get("/api/unboxd/likesbyuser/" + username);
+    },
+
+    updateLikes: function(data) {
+        return axios.post("/api/unboxd/updatelikes/", data);
     }
     
-
 };

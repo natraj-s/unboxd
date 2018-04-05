@@ -77,6 +77,30 @@ class Login extends React.Component {
         }
     }
 
+    validateEmail = () => {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let email = this.state.suemail;
+
+        if (email === "") {
+            this.setState({ suemailMsg: "Email cannot be blank." });
+            return false;
+        }
+        else {
+            if(!re.test(String(email).toLowerCase())) {
+                this.setState({ suemailMsg: "Invalid email format" });
+                return false;
+            }
+            else {
+                this.setState({ 
+                    suemailValid: true,
+                    suemailMsg: "" 
+                });
+                
+                return true;
+            }
+        }
+    }
+
     checkPassword = event => {
         if (event !== undefined) {
             // console.log("heyah");
@@ -116,8 +140,9 @@ class Login extends React.Component {
     handleSubmit = event => {
         event.preventDefault();
         if (!this.state.suusernameValid) { this.checkUser(); }
+        if (!this.state.suemailValid) { this.validateEmail(); }
         if (!this.state.supwdValid) { this.checkPassword(); }
-        if (this.state.suusernameValid && this.state.supwdValid) {
+        if (this.state.suusernameValid && this.state.suemailValid && this.state.supwdValid) {
             this.setState({
                 signuploading: true
             });
@@ -168,6 +193,10 @@ class Login extends React.Component {
                                     this.props.handleLoginChange("true");
                                     console.log("from handlelogin ", this.props);
                                     localStorage.setItem("__u", this.state.loginusername);
+                                    API.getLikesByUser(this.state.loginusername)
+                                        .then(res => {
+                                            localStorage.setItem("__uLikes", JSON.stringify(res.data));
+                                        })
                                     this.props.history.push("/loggedin");
                                 })
                                 .catch(error => {
