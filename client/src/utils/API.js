@@ -83,8 +83,8 @@ export default {
         return axios.get("/api/unboxd/articles/" + title);
     },
 
-    getById: function(userId) {
-        return axios.get("/api/unboxd/articlesbyid/" + userId);
+    getById: function(articleId) {
+        return axios.get("/api/unboxd/articlesbyid/" + articleId);
     },
 
     getClicks: function(title) {
