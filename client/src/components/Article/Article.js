@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Article.css";
 import API from "../../utils/API";
 import Methods from "../../utils/Methods";
@@ -24,7 +25,7 @@ class Article extends Component {
         this.isLiked();
     }
 
-    storeClicksData = () => {    
+    storeClicksData = () => {
         let data = JSON.parse(localStorage.getItem(this.props.category));
 
         data.forEach(element => {
@@ -69,7 +70,7 @@ class Article extends Component {
                     let articleObj = {
                         "articleId": '' + articleId + ''
                     }
-                    if(likes.length > 2) {
+                    if (likes.length > 2) {
                         likes += ",";
                     }
                     likes += JSON.stringify(articleObj) + "]";
@@ -82,12 +83,12 @@ class Article extends Component {
             console.log("likes ", likes);
             console.log("fullstr ", fullStr);
 
-            if(likes.indexOf(fullStr) !== 1) {
+            if (likes.indexOf(fullStr) !== 1) {
                 fullStr = "," + fullStr;
                 console.log("fullstr not first ", fullStr);
             }
             else {
-                if(likes.length !== fullStr.length + 2) {
+                if (likes.length !== fullStr.length + 2) {
                     fullStr = fullStr + ",";
                 }
                 console.log("fullstr first ", fullStr);
@@ -96,7 +97,7 @@ class Article extends Component {
             console.log(likes);
             localStorage.setItem("__uLikes", likes);
 
-            API.unlikeFromUser(user, articleId);            
+            API.unlikeFromUser(user, articleId);
         }
 
         // need to update localstorage as well
@@ -130,8 +131,8 @@ class Article extends Component {
                                 <div className="title">
                                     <div className="image" style={{ backgroundImage: `url(${this.props.img})` }} title={this.props.title}>
                                     </div>
-                                    <span className="artTitle"><a onClick={this.props.page === "mainpage" ? 
-                                            this.incrementClicks : null} href={this.props.url} target="_blank">{this.props.title}</a></span>
+                                    <span className="artTitle"><a onClick={this.props.page === "mainpage" ?
+                                        this.incrementClicks : null} href={this.props.url} target="_blank">{this.props.title}</a></span>
                                 </div>
                                 <div className="source">
                                     <p>
@@ -145,7 +146,9 @@ class Article extends Component {
                                             <label id="clickslabel">CLICKS: </label> {this.state.clicks}
                                         </span>
                                         <span>
-                                            <label id="commentslabel">COMMENTS: </label> 0
+                                            <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
+                                                <label id="commentslabel" title="Read comments on this post">COMMENTS: </label> 0
+                                            </Link>
                                         </span>
                                         <span>
                                             <span className={!localStorage.getItem("__u") ?
@@ -160,17 +163,19 @@ class Article extends Component {
                                 </div>
                             </div>
 
-                            <div className="artBody">
-                                <p className={this.state.hidden ? "hidden" : ""}>
-                                    {this.props.descr}
-                                </p>
+                            <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
+                                <div className="artBody" title="Read comments on this post">
+                                    <p className={this.state.hidden ? "hidden" : ""}>
+                                        {this.props.descr}
+                                    </p>
 
-                                <div className="misc">
-                                    {/* <span  */}
-                                    <span onClick={this.hideThis}
-                                        className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
+                                    <div className="misc">
+                                        {/* <span  */}
+                                        <span onClick={this.hideThis}
+                                            className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
+                                    </div>
                                 </div>
-                            </div>
+                            </Link>
                         </div>
                     </div>
                 </div>

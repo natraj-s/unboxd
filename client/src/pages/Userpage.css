@@ -10,11 +10,11 @@
     padding-top: 15px;
     margin-bottom: 15px;
     padding-bottom: 15px;
-    background: #43caff; /* Old browsers */
-    background: -moz-linear-gradient(45deg, #e2d1c3 0%, #f8f2eb 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(45deg, #e2d1c3   0%,#f8f2eb 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(45deg, #e2d1c3   0%,#f8f2eb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2d1c3 ', endColorstr='#f8f2eb',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: #ed9ae5; /* Old browsers */
+    background: -moz-linear-gradient(45deg, #ed9ae5 0%, #a47eef 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, #ed9ae5 0%,#a47eef 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #ed9ae5 0%,#a47eef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed9ae5', endColorstr='#a47eef',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .userpageHeader {

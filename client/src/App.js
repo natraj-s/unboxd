@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import TransitionPage from "./pages/TransitionPage";
 import Userpage from "./pages/Userpage";
+import Post from "./pages/Post";
 
 class App extends Component {
 
@@ -39,6 +40,7 @@ class App extends Component {
                                                   : Content } />
         <Route exact path="/userpage" component={(this.state.isLoggedIn || localStorage.getItem("__u") !== null)
                                                   ? Userpage : Content} />
+        <Route path="/post/:id" component={Post} />
         <Route exact path="/*" render={() => (<Content isLoggedIn={this.state.isLoggedIn} />)} />
         </Switch>
       </div>
