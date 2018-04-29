@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   handleLoginChange = status => {
-    console.log("in handle login change");
+    // console.log("in handle login change");
     this.setState({ isLoggedIn: status });
   }
 

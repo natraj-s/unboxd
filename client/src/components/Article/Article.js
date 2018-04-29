@@ -116,7 +116,6 @@ class Article extends Component {
 
     render() {
         return (
-            <div className="container">
                 <div className="row">
                     <div className="container-fluid">
                         <div className={this.props.category === "Entertainment" ? "article entertainment" :
@@ -179,7 +178,6 @@ class Article extends Component {
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }

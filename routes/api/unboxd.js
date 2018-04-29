@@ -66,4 +66,12 @@ router
   .route("/finduser/:username")
   .get(ubController.findUser);
 
+router
+  .route("/getArtComments/:articleId")
+  .get(ubController.getArtComments);
+
+router
+  .route("/comment")
+  .post(ubController.postComment);
+
 module.exports = router;

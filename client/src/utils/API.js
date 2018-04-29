@@ -56,13 +56,13 @@ export default {
     },
 
     createUser: function(data) {
-        console.log("data from API.js ", data);
+        // console.log("data from API.js ", data);
         // return axios.post("/api/unboxd/signup", data);
         return axios.post("/api/unboxd/signup", data)
     },
 
     handleLogin: function(data) {
-        console.log("data from API.js ", data);
+        // console.log("data from API.js ", data);
         // return axios.post("/api/unboxd/signup", data);
         return axios.post("/api/unboxd/signin", data)
     },
@@ -109,6 +109,14 @@ export default {
 
     updateLikes: function(data) {
         return axios.post("/api/unboxd/updatelikes/", data);
+    },
+
+    getComments: function(articleId) {
+        return axios.get("/api/unboxd/getArtComments/" + articleId);
+    },
+
+    postComment: function(data) {
+        return axios.post("/api/unboxd/comment", data);
     }
     
 };

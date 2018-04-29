@@ -32,21 +32,8 @@
     text-align: justify;
 }
 
-.singleComment {
-    border-left: 6px solid rgb(0, 184, 197);
-    box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
+.replyToComment {
+    font-size: 11px;
+    color: #6e6e6e;
     padding-bottom: 5px;
-    margin-bottom: 2px;
-    font-size: 12px;
-}
-
-.username {
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.commentHeader {
-    border-bottom: 1px solid rgba(0,0,0,.1);
-    padding-top: 5px;
 }
