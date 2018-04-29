@@ -1,10 +1,13 @@
 .nav-item, .nav-link {
+    font-size: 13px;
     cursor: pointer;
 }
 
 .nav-link:hover, .nav-link.hover,
-.nav-link:focus, .nav-link.fovus {
+.nav-link:focus, .nav-link.focus
+.nav-link:active,.nav-link.active {
     color: #fff;
+    font-weight: 600;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Abel');
+@import url('https://fonts.googleapis.com/css?family=Patua+One');
 
 .article {
     border-radius: 4px;
@@ -219,9 +219,9 @@
 }
 
 .title {
-    font-family: 'Abel', sans-serif;
+    font-family: 'Patua One', sans-serif;
     font-size: 22px;
-    text-shadow: 2px 2px 2px #386899;
+    text-shadow: 1px 1px 2px #757575;
     cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,.1);
 }
@@ -258,6 +258,7 @@ p {
     background-color: #FCF7F8;
     text-align: justify;
     cursor: pointer;
+    font-size: 13px;
 }
 
 /* .artBody:hover{

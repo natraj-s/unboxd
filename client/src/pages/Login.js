@@ -191,7 +191,7 @@ class Login extends React.Component {
                                 .then(res => {
                                     this.setState({ loginMsg: "" });
                                     this.props.handleLoginChange("true");
-                                    console.log("from handlelogin ", this.props);
+                                    // console.log("from handlelogin ", this.props);
                                     localStorage.setItem("__u", this.state.loginusername);
                                     API.getLikesByUser(this.state.loginusername)
                                         .then(res => {

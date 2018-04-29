@@ -165,5 +165,25 @@ module.exports = {
             .create(req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+
+    getArtComments: function(req, res) {
+        db.UserComments
+        .findAll(             
+            { where: 
+                { 
+                    articleId: req.params.articleId
+                }
+            }
+        )
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+
+    postComment: function(req, res) {
+        db.UserComments
+            .create(req.body)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 };             

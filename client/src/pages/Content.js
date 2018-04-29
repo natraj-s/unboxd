@@ -28,15 +28,15 @@ class Content extends React.Component {
 
     handlePageChange = page => {
         this.setState({ currentPage: page });
-        console.log("Entered this call at " + Date.now() + " " + page);
+        // console.log("Entered this call at " + Date.now() + " " + page);
         API.getLatest(this.state.currentCat)
             .then(res => {
                 let data = res.data;
-                console.log("original this.state.currentCat ", this.state.currentCat);
+                // console.log("original this.state.currentCat ", this.state.currentCat);
                 localStorage.setItem(this.state.currentCat, JSON.stringify(data));
 
                 data.sort(Methods.ageSort);
-                console.log("aged this.state.currentCat ", this.state.currentCat);
+                // console.log("aged this.state.currentCat ", this.state.currentCat);
 
                 localStorage.setItem(this.state.currentCat + "Aged", JSON.stringify(data));
 
@@ -48,10 +48,10 @@ class Content extends React.Component {
     }
 
     sortBy = (order) => {
-        console.log("entered");
+        // console.log("entered");
         this.setState({ currentPage: order });        
         if (order === "Breaking") {
-            console.log("Breaking? ", order);
+            // console.log("Breaking? ", order);
             this.setState({
                 content: JSON.parse(localStorage.getItem(this.state.currentCat)),
                 loading: false
@@ -65,7 +65,7 @@ class Content extends React.Component {
 
         }
         if(order === "Trending") {
-            console.log("Trending? ", order);
+            // console.log("Trending? ", order);
             this.setState({
                 content: JSON.parse(localStorage.getItem(this.state.currentCat + "Trending")),
                 loading: false
@@ -115,13 +115,13 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
 
-                    console.log("Done creating at ", Date.now());
+                    // console.log("Done creating at ", Date.now());
                     // data.sort(this.newSort);
                     // this.setState({
                     //     content: data
@@ -140,7 +140,7 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
@@ -156,7 +156,7 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
@@ -188,7 +188,7 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
@@ -220,7 +220,7 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
@@ -236,7 +236,7 @@ class Content extends React.Component {
                 .then(res => {
                     this.setState({loading: true});
                     data = res.data.articles;
-                    console.log("I came ", data);
+                    // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
@@ -261,7 +261,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("EntertainmentTrending")) :
                         JSON.parse(localStorage.getItem("Entertainment"))
                 });
-                console.log("Ent difference is: " + diff);
+                // console.log("Ent difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Entertainment", true);
@@ -278,7 +278,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("SportsTrending")) :
                         JSON.parse(localStorage.getItem("Sports"))
                 });
-                console.log("Sports difference is: " + diff);
+                // console.log("Sports difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Sports", true);
@@ -295,7 +295,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("ScienceTrending")) :
                         JSON.parse(localStorage.getItem("Science"))
                 });
-                console.log("Science difference is: " + diff);
+                // console.log("Science difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Science", true);
@@ -312,7 +312,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("HealthTrending")) :
                         JSON.parse(localStorage.getItem("Health"))
                 });
-                console.log("Health difference is: " + diff);
+                // console.log("Health difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Health", true);
@@ -329,7 +329,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("TechTrending")) :
                         JSON.parse(localStorage.getItem("Tech"))
                 });
-                console.log("Tech difference is: " + diff);
+                // console.log("Tech difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Tech", true);
@@ -346,7 +346,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("VideoGameTrending")) :
                         JSON.parse(localStorage.getItem("VideoGames"))
                 });
-                console.log("VideoGames difference is: " + diff);
+                // console.log("VideoGames difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("VideoGames", true);
@@ -363,7 +363,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("BusinessTrending")) :
                         JSON.parse(localStorage.getItem("Business"))
                 });
-                console.log("Business difference is: " + diff);
+                // console.log("Business difference is: " + diff);
             }
             else {
                 this.getAndStoreArticles("Business", true);
@@ -380,7 +380,7 @@ class Content extends React.Component {
                         JSON.parse(localStorage.getItem("HomepageTrending")) :
                         JSON.parse(localStorage.getItem("Homepage"))
                 });
-                console.log("Homepage difference is: " + diff);
+                // console.log("Homepage difference is: " + diff);
                 // console.log()
             }
             else {
