@@ -5,6 +5,7 @@ import "./Post.css";
 import LoadingWheel from "../components/LoadingWheel";
 import Article from "../components/Article";
 import Comment from "../components/Comment";
+import CommentsPane from "../components/CommentsPane";
 
 class Post extends Component {
     constructor(props) {
@@ -16,13 +17,31 @@ class Post extends Component {
         article: [],
         comment: "",
         comments: [],
-        newComments: false,
+        newComments: true,
         replyToComment: false,
         parentComment: 0
     }
 
     handleComment = event => {
-        this.setState({ comment: event.target.value });
+        this.setState({ 
+            comment: event.target.value 
+        });
+    }
+
+    resetNewCommentsState = () => {
+        this.setState({
+            newComments: false
+        });
+    }
+
+    getComments = (id) => {
+        API.getComments(id).then(res => {
+            this.setState({
+                comments: res.data,
+                loading: false,
+                newComments: false
+            });
+        })
     }
 
     componentDidMount = () => {
@@ -32,45 +51,29 @@ class Post extends Component {
             this.setState({
                 article: res.data[0]
             });
-            API.getComments(id).then(res => {
-                this.setState({
-                    comments: res.data,
-                    loading: false
-                });
-                // console.log(res.data);
-            })
+            this.getComments(id);
         })
-    }
-
-    findParentObj = (parentId) => {
-        if (parentId !== "0") {
-            let obj = this.state.comments.find(o => parseInt(o.id, 10) === parseInt(parentId, 10));
-            let temp = {
-                comment: obj.comment,
-                userName: obj.userName,
-                createdAt: obj.createdAt
-            }
-
-            return temp;
-        }
-    }
+    } 
 
     postComment = () => {
-        if (this.state.ncomment !== "") {
+        if (this.state.comment !== "") {
+            let articleId = this.props.match.params.id;
+
             let commentObj = {
                 userName: localStorage.getItem("__u"),
-                articleId: this.props.match.params.id,
+                articleId: articleId,
                 comment: this.state.comment,
                 parentId: this.state.parentComment
             }
 
             API.postComment(commentObj).then(res => {
                 console.log("from post comment ", res);
+                this.getComments(articleId);
                 this.setState({
                     comment: "",
-                    replyToComment: false
+                    replyToComment: false,
+                    newComments: true
                 });
-                this.componentDidMount();
             })
         }
     }
@@ -89,21 +92,21 @@ class Post extends Component {
                 <div className="container-fluid">
                     <div className="col-md-12">
                         {this.state.loading ? <LoadingWheel /> :
-                            <Article
-                                key={this.state.article.id}
-                                id={this.state.article.id}
-                                title={this.state.article.title}
-                                author={this.state.article.author}
-                                publAt={this.state.article.publishedAt}
-                                source={this.state.article.source}
-                                url={this.state.article.url}
-                                img={this.state.article.urlToImage}
-                                descr={this.state.article.description}
-                                look={""}
-                                category={this.state.article.category}
-                                clicks={this.state.article.clicks}
-                                page={"postpage"}
-                            />
+                        <Article
+                            key={this.state.article.id}
+                            id={this.state.article.id}
+                            title={this.state.article.title}
+                            author={this.state.article.author}
+                            publAt={this.state.article.publishedAt}
+                            source={this.state.article.source}
+                            url={this.state.article.url}
+                            img={this.state.article.urlToImage}
+                            descr={this.state.article.description}
+                            look={""}
+                            category={this.state.article.category}
+                            clicks={this.state.article.clicks}
+                            page={"postpage"}
+                        />
                         }
 
                         <div className="row">
@@ -124,7 +127,11 @@ class Post extends Component {
                                             <p className={this.state.replyToComment ? "replyToComment" : "hidden"}>
                                                 REPLYING TO #{this.state.parentComment}:
                                             </p>
-                                            <textarea className="form-control" id="commentForm" rows="3" onChange={this.handleComment} value={this.state.comment}></textarea>
+                                            <textarea className="form-control" id="commentForm" rows="3" 
+                                            onChange={this.handleComment} 
+                                            value={this.state.comment}
+                                            onClick={this.resetNewCommentsState}>
+                                            </textarea>
                                             <button type="button" className="btn commentSubmit" onClick={this.postComment}>SUBMIT</button>
                                         </div>
                                         <div className={localStorage.getItem("__u") ? "hidden" : ""}>
@@ -137,39 +144,7 @@ class Post extends Component {
                                             </label>
                                         </div>
                                     </div>
-                                    <div className="col-md-12 commentsSection">
-                                        {this.state.comments === undefined ?
-                                            <div className="col-md-11 singleComment">
-                                                <div className="commentBody">
-                                                    NO COMMENTS YET. BE THE FIRST TO POST A COMMENT
-                                                </div>
-                                            </div>
-                                            :
-                                            this.state.comments.map(elem => (
-                                                elem.parentId === "0" ?
-                                                    <Comment
-                                                        key={elem.id}
-                                                        id={elem.id}
-                                                        username={elem.userName}
-                                                        commentBody={elem.comment}
-                                                        parentId={elem.parentId}
-                                                        replyHandler={this.replyTo}
-                                                    />
-                                                    :
-                                                <Comment
-                                                    key={elem.id}
-                                                    id={elem.id}
-                                                    username={elem.userName}
-                                                    commentBody={elem.comment}
-                                                    parentId={elem.parentId}
-                                                    parentObj={this.findParentObj(elem.parentId)}
-                                                    replyHandler={this.replyTo}
-                                                />
-
-                                            ))
-                                        }
-                                    </div>
-
+                                    <CommentsPane comments={this.state.comments} replyTo={this.replyTo} />
                                 </div>
                             </div>
                         </div>
