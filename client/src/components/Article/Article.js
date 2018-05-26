@@ -146,7 +146,7 @@ class Article extends Component {
                                         </span>
                                         <span>
                                             <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
-                                                <label id="commentslabel" title="Read comments on this post">COMMENTS: </label> 0
+                                                <label id="commentslabel" title="Read comments on this post">COMMENTS: </label> {this.props.comments}
                                             </Link>
                                         </span>
                                         <span>

@@ -23,6 +23,7 @@ const ContentPane = props => (
                     currentPage={props.currentPage}
                     handlePageChange={props.handlePageChange}
                     clicks={article.clicks}
+                    comments={article.comments}
                     likes={article.likes}
                     isLoggedIn={props.isLoggedIn}
                     page={props.page}
@@ -40,6 +41,7 @@ const ContentPane = props => (
                     look={index%2 !== 0 ? "dark" : ""}
                     category={article.category}
                     clicks={article.clicks}
+                    comments={article.comments}
                     page={props.page}                    
                 />
             ))}

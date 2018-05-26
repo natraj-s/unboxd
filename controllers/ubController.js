@@ -34,6 +34,7 @@ module.exports = {
         console.log("came here sorted");
         db.Article
             .findAll({
+                limit: 20,
                 order: [
                     ['clicks', 'DESC'],
                 ]
@@ -46,6 +47,7 @@ module.exports = {
         console.log("came here latest");
         db.Article
             .findAll({
+                limit: 20,
                 where: {
                     category: req.params.category
                 },
@@ -61,6 +63,7 @@ module.exports = {
         console.log("came here aged");
         db.Article
             .findAll({
+                limit: 20,
                 where: {
                     category: req.params.category
                 },
@@ -178,6 +181,29 @@ module.exports = {
         )
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
+    },
+
+    getArtNumComments: function(req, res) {
+        db.UserComments
+        .count(             
+            { where: 
+                { 
+                    articleId: req.params.articleId
+                }
+            }
+        )
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+
+    updateCommentsNum: function(req, res) {
+        db.Article
+            .update(
+                    { comments: req.params.comments },
+                    { where: { id: req.params.articleId }}
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     },
 
     postComment: function(req, res) {
