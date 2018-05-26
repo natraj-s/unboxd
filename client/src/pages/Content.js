@@ -98,7 +98,6 @@ class Content extends React.Component {
                         description: data.description,
                         category: category,
                         clicks: "0",
-                        likes: data.clicks,
                         comments: "0"
                     }
 

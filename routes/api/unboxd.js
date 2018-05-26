@@ -45,10 +45,6 @@ router
   .route("/updatelikes/")
   .post(ubController.updateLikes);
 
-// router
-//   .route("/signup")
-//   .post(ubController.createUser);
-
 router.
   route("/signup")
   .post(passport.authenticate("local-signup"), (req, res) => {
@@ -69,6 +65,14 @@ router
 router
   .route("/getArtComments/:articleId")
   .get(ubController.getArtComments);
+
+router
+  .route("/getArtNumComments/:articleId")
+  .get(ubController.getArtNumComments);
+
+router
+  .route("/updateComments/:articleId/:comments")
+  .put(ubController.updateCommentsNum);
 
 router
   .route("/comment")

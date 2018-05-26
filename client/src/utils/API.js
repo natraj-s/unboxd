@@ -71,6 +71,7 @@ export default {
         return axios.get("/api/unboxd/finduser/" + username);
     },
 
+
     getLatest: function(category) {
         return axios.get("/api/unboxd/breaking/"+ category);
     },
@@ -112,7 +113,17 @@ export default {
     },
 
     getComments: function(articleId) {
+        console.log("I'm getting called " + articleId);
         return axios.get("/api/unboxd/getArtComments/" + articleId);
+    },
+
+    getNumComments: function(articleId) {
+        return axios.get("/api/unboxd/getArtNumComments/" + articleId);
+    },
+
+    updateComments: function(articleId, comments) {
+        console.log("api update here with " + articleId + " and " + comments);
+        return axios.put("/api/unboxd/updateComments/" + articleId + "/" + comments);
     },
 
     postComment: function(data) {

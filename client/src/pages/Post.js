@@ -6,6 +6,7 @@ import LoadingWheel from "../components/LoadingWheel";
 import Article from "../components/Article";
 import Comment from "../components/Comment";
 import CommentsPane from "../components/CommentsPane";
+import Methods from "../utils/Methods";
 
 class Post extends Component {
     constructor(props) {
@@ -44,6 +45,13 @@ class Post extends Component {
         })
     }
 
+    getAndUpdateCommentsNum = (id) => {
+        API.getNumComments(id).then(res => {
+            let commentsNum =  res.data;
+            this.updateCommentsNum(commentsNum);
+        })
+    }
+
     componentDidMount = () => {
         let id = this.props.match.params.id;
 
@@ -69,6 +77,7 @@ class Post extends Component {
             API.postComment(commentObj).then(res => {
                 console.log("from post comment ", res);
                 this.getComments(articleId);
+                this.getAndUpdateCommentsNum(articleId);                
                 this.setState({
                     comment: "",
                     replyToComment: false,
@@ -76,6 +85,21 @@ class Post extends Component {
                 });
             })
         }
+    }
+
+    updateCommentsNum = (commentsNum) => {
+        let articleId = this.props.match.params.id;
+
+        let articleCopy = Object.assign({}, this.state.article);
+        articleCopy.comments = commentsNum;
+        this.setState({ article : articleCopy });
+
+        API.updateComments(articleId, articleCopy.comments).then(res => {
+            localStorage.setItem(this.props.category, JSON.stringify(res.data));
+            localStorage.setItem(this.props.category + "Aged", JSON.stringify(res.data.sort(Methods.ageSort)));
+            localStorage.setItem(this.props.category + "Trending", JSON.stringify(res.data.sort(Methods.clickSort)));
+         });
+        // this.render();
     }
 
     replyTo = (parentComment) => {
@@ -105,6 +129,7 @@ class Post extends Component {
                             look={""}
                             category={this.state.article.category}
                             clicks={this.state.article.clicks}
+                            comments={this.state.article.comments}
                             page={"postpage"}
                         />
                         }
