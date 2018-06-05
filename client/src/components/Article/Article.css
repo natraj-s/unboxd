@@ -234,30 +234,29 @@
 }
 
 .source { 
-    padding-top: 5px;
+    padding-top: 3px;
     text-transform: uppercase;
-    line-height: 1.5;
+    line-height: 1;
+    font-size: 11px;
 }
 
 p {
     margin-bottom: 0;
 }
 
-.source label {
-    font-size: 11px;
+.source label {    
     padding-right: 5px;
 }
 
 .source span {
     margin-right: 15px;
-    font-size: 14px;
 }
 
 .artBody {
     background-color: #FCF7F8;
     text-align: justify;
     cursor: pointer;
-    font-size: 13px;    
+    font-size: 12px;    
 }
 
 .artDescr {
@@ -282,9 +281,10 @@ p {
 
 .oi {
     cursor: pointer;
+    font-size: 13px;
 }
 
 .liked {
-    font-size: 16px;
+    font-size: 13px;
     color: #00ffae; /* Old browsers */
 }
