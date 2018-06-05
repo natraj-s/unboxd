@@ -75,7 +75,7 @@ class Post extends Component {
             }
 
             API.postComment(commentObj).then(res => {
-                console.log("from post comment ", res);
+                // console.log("from post comment ", res);
                 this.getComments(articleId);
                 this.getAndUpdateCommentsNum(articleId);                
                 this.setState({
@@ -95,11 +95,12 @@ class Post extends Component {
         this.setState({ article : articleCopy });
 
         API.updateComments(articleId, articleCopy.comments).then(res => {
-            localStorage.setItem(this.props.category, JSON.stringify(res.data));
-            localStorage.setItem(this.props.category + "Aged", JSON.stringify(res.data.sort(Methods.ageSort)));
-            localStorage.setItem(this.props.category + "Trending", JSON.stringify(res.data.sort(Methods.clickSort)));
-         });
-        // this.render();
+            // localStorage.setItem(this.props.category, JSON.stringify(res.data));
+            // localStorage.setItem(this.props.category + "Aged", JSON.stringify(res.data.sort(Methods.ageSort)));
+            // localStorage.setItem(this.props.category + "Trending", JSON.stringify(res.data.sort(Methods.clickSort)));
+            this.forceUpdate();
+        });
+        
     }
 
     replyTo = (parentComment) => {

@@ -113,7 +113,7 @@ export default {
     },
 
     getComments: function(articleId) {
-        console.log("I'm getting called " + articleId);
+        // console.log("I'm getting called " + articleId);
         return axios.get("/api/unboxd/getArtComments/" + articleId);
     },
 
@@ -122,7 +122,7 @@ export default {
     },
 
     updateComments: function(articleId, comments) {
-        console.log("api update here with " + articleId + " and " + comments);
+        // console.log("api update here with " + articleId + " and " + comments);
         return axios.put("/api/unboxd/updateComments/" + articleId + "/" + comments);
     },
 

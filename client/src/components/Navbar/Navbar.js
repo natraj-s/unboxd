@@ -8,15 +8,15 @@ const Navbar = props => (
                 {/* { console.log(props) } */}
                 <li onClick={() => props.handlePageChange("Breaking")}
                     className="nav-item">
-                    <a className={props.currentPage === "Breaking" ? "nav-link active" : "nav-link"}>Breaking</a>
+                    <a className={props.currentPage === "Breaking" ? "nav-link active" : "nav-link"}>BREAKING</a>
                 </li>
                 <li onClick={() => props.handlePageChange("Trending")}
                     className="nav-item">
-                    <a className={props.currentPage === "Trending" ? "nav-link active" : "nav-link"}>Trending</a>
+                    <a className={props.currentPage === "Trending" ? "nav-link active" : "nav-link"}>TRENDING</a>
                 </li>
                 <li onClick={() => props.handlePageChange("Aged")}
                     className="nav-item">
-                    <a className={props.currentPage === "Aged" ? "nav-link active" : "nav-link"}>Aged</a>
+                    <a className={props.currentPage === "Aged" ? "nav-link active" : "nav-link"}>AGED</a>
                 </li>
             </ul>
         </div>
