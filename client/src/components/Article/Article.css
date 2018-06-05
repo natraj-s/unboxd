@@ -4,7 +4,7 @@
     border-radius: 4px;
     border-top-right-radius: 4px;
     border-bottom: 1px solid #e6e6e6;
-    margin-top: 15px;
+    margin-top: 10px;
     display: block;
     text-align: left;
     box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
@@ -219,19 +219,18 @@
 }
 
 .title {
-    font-family: 'Patua One', sans-serif;
-    font-size: 22px;
-    text-shadow: 1px 1px 2px #757575;
+    font-family: 'Patua One', cursive;
+    font-size: 20px;
+    text-shadow: 2px 1px 2px #343a40;
     cursor: pointer;
-    border-bottom: 1px solid rgba(0,0,0,.1);
+    border-bottom: 1px solid rgba(0,0,0,.1);      
 }
 
 .artTitle {
     position: relative;
-}
-
-.title:hover {
-    text-shadow: 2px 2px 2px #343a40;
+    overflow: hidden;  
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .source { 
@@ -258,7 +257,13 @@ p {
     background-color: #FCF7F8;
     text-align: justify;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 13px;    
+}
+
+.artDescr {
+    overflow: hidden;  
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 /* .artBody:hover{
@@ -267,6 +272,7 @@ p {
 
 .misc {
     text-align: right;
+    font-size: 8px;
     color: rgba(50,50,50,0.28);
 }
 
@@ -281,8 +287,4 @@ p {
 .liked {
     font-size: 16px;
     color: #00ffae; /* Old browsers */
-}
-
-#commentslabel {
-    cursor: pointer;
 }

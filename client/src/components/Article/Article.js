@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Article.css";
 import API from "../../utils/API";
 import Methods from "../../utils/Methods";
+import CommentsNum from "../CommentsNum";
 
 class Article extends Component {
     constructor(props) {
@@ -130,8 +131,8 @@ class Article extends Component {
                                 <div className="title">
                                     <div className="image" style={{ backgroundImage: `url(${this.props.img})` }} title={this.props.title}>
                                     </div>
-                                    <span className="artTitle"><a onClick={this.props.page === "mainpage" ?
-                                        this.incrementClicks : null} href={this.props.url} target="_blank">{this.props.title}</a></span>
+                                    <p className="artTitle"><a onClick={this.props.page === "mainpage" ?
+                                        this.incrementClicks : null} href={this.props.url} target="_blank">{this.props.title}</a></p>
                                 </div>
                                 <div className="source">
                                     <p>
@@ -143,32 +144,26 @@ class Article extends Component {
                                         </span>
                                         <span className={this.props.page === "userpage" ? "hidden" : ""}>
                                             <label id="clickslabel">CLICKS: </label> {this.state.clicks}
-                                        </span>
-                                        <span>
-                                            <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
-                                                <label id="commentslabel" title="Read comments on this post">COMMENTS: </label> {this.props.comments}
-                                            </Link>
-                                        </span>
+                                        </span>    
+                                        <CommentsNum id={this.props.id} comments={this.props.comments} />                                    
                                         <span>
                                             <span className={!localStorage.getItem("__u") ?
                                                 "oi oi-thumb-up hidden" :
                                                 this.state.liked ? "oi oi-thumb-up liked" :
                                                     "oi oi-thumb-up"} onClick={this.updateLikes}>
                                             </span>
-                                        </span>
-
-
+                                        </span>                                        
                                     </p>
                                 </div>
                             </div>
 
                             <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
                                 <div className="artBody" title="Read comments on this post">
-                                    <p className={this.state.hidden ? "hidden" : ""}>
-                                        {this.props.descr}
+                                    <p className={this.state.hidden ? "hidden" : "artDescr"}>
+                                        {(this.props.descr === null || this.props.descr === "") ? "No description available" : this.props.descr}
                                     </p>
 
-                                    <div className="misc">
+                                    <div className="misc" title="Collapse">
                                         {/* <span  */}
                                         <span onClick={this.hideThis}
                                             className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
