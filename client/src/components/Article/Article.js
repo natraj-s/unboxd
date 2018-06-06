@@ -4,6 +4,7 @@ import "./Article.css";
 import API from "../../utils/API";
 import Methods from "../../utils/Methods";
 import CommentsNum from "../CommentsNum";
+import ClicksNum from "../ClicksNum";
 
 class Article extends Component {
     constructor(props) {
@@ -16,14 +17,14 @@ class Article extends Component {
         hidden: false
     }
 
+    componentDidMount = () => {
+        this.isLiked();
+    }
+
     incrementClicks = () => {
         console.log(this.props.category);
         this.setState({ clicks: this.state.clicks + 1 })
         this.storeClicksData();
-    }
-
-    componentDidMount = () => {
-        this.isLiked();
     }
 
     storeClicksData = () => {
@@ -34,6 +35,7 @@ class Article extends Component {
                 element.clicks = parseInt(element.clicks, 10) + 1;
                 this.setState({ clicks: element.clicks });
                 API.updateClicks(element.title, element.clicks).then(res => {
+                    // console.log(res);
                 });
             }
         });
@@ -41,7 +43,7 @@ class Article extends Component {
         localStorage.setItem(this.props.category, JSON.stringify(data));
         localStorage.setItem(this.props.category + "Aged", JSON.stringify(data.sort(Methods.ageSort)));
         localStorage.setItem(this.props.category + "Trending", JSON.stringify(data.sort(Methods.clickSort)));
-        this.props.handlePageChange(this.props.currentPage);
+        // this.props.handlePageChange(this.props.currentPage);
         console.log("test");
     }
 
@@ -142,9 +144,7 @@ class Article extends Component {
                                         <span>
                                             <label id="publatlabel">POSTED AT: </label>{this.props.publAt}
                                         </span>
-                                        <span className={this.props.page === "userpage" ? "hidden" : ""}>
-                                            <label id="clickslabel">CLICKS: </label> {this.state.clicks}
-                                        </span>    
+                                        <ClicksNum page={this.props.page} clicks={this.state.clicks} />                                          
                                         <CommentsNum id={this.props.id} comments={this.props.comments} />                                    
                                         <span>
                                             <span className={!localStorage.getItem("__u") ?

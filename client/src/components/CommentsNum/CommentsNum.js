@@ -9,7 +9,7 @@ class CommentsNum extends Component {
     }
 
     state = {
-        commentsNum: this.props.comments
+        commentsNum: 0
     }
 
     setComments = (articleId) => {
@@ -25,12 +25,12 @@ class CommentsNum extends Component {
         this.setComments(this.props.id);
     }
 
-    componentWillReceiveProps(nextState) {
-        let nextComments = parseInt(nextState.comments, 10);
-        // console.log(nextState);
-        // console.log("current comments " + this.state.commentsNum + " for id " + this.props.id);
-        this.setState({ commentsNum: nextState.comments });               
-    }
+    // componentWillReceiveProps(nextState) {
+    //     let nextComments = parseInt(nextState.comments, 10);
+    //     // console.log(nextState);
+    //     // console.log("current comments " + this.state.commentsNum + " for id " + this.props.id);
+    //     this.setState({ commentsNum: nextState.comments });               
+    // }
 
     render() {
         return (

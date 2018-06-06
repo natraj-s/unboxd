@@ -25,7 +25,7 @@ const Comment = props => (
                 {props.commentBody}
             </div>
             <div className="commentfooter">
-                <span className="oi oi-chat" onClick={() => props.replyHandler(props.id)}>
+                <span className="oi oi-chat" title="Quote and reply to this comment" onClick={() => props.replyHandler(props.id)}>
                  </span> #{props.id}
          </div>
         </div>
