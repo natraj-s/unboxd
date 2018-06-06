@@ -24,8 +24,8 @@ class Post extends Component {
     }
 
     handleComment = event => {
-        this.setState({ 
-            comment: event.target.value 
+        this.setState({
+            comment: event.target.value
         });
     }
 
@@ -33,23 +33,6 @@ class Post extends Component {
         this.setState({
             newComments: false
         });
-    }
-
-    getComments = (id) => {
-        API.getComments(id).then(res => {
-            this.setState({
-                comments: res.data,
-                loading: false,
-                newComments: false
-            });
-        })
-    }
-
-    getAndUpdateCommentsNum = (id) => {
-        API.getNumComments(id).then(res => {
-            let commentsNum =  res.data;
-            this.updateCommentsNum(commentsNum);
-        })
     }
 
     componentDidMount = () => {
@@ -61,7 +44,19 @@ class Post extends Component {
             });
             this.getComments(id);
         })
-    } 
+    }
+
+    componentWillUnmount() {
+        this.setState({
+            loading: true,
+            article: [],
+            comment: "",
+            comments: [],
+            newComments: true,
+            replyToComment: false,
+            parentComment: 0
+        });
+    }
 
     postComment = () => {
         if (this.state.comment !== "") {
@@ -77,7 +72,7 @@ class Post extends Component {
             API.postComment(commentObj).then(res => {
                 // console.log("from post comment ", res);
                 this.getComments(articleId);
-                this.getAndUpdateCommentsNum(articleId);                
+                this.getAndUpdateCommentsNum(articleId);
                 this.setState({
                     comment: "",
                     replyToComment: false,
@@ -87,20 +82,39 @@ class Post extends Component {
         }
     }
 
+    getComments = (id) => {
+        API.getComments(id).then(res => {
+            this.setState({
+                comments: res.data,
+                loading: false,
+                newComments: false
+            });
+        })
+    }
+
+    getAndUpdateCommentsNum = (id) => {
+        API.getNumComments(id).then(res => {
+            let commentsNum = res.data;
+            this.updateCommentsNum(commentsNum);
+        })
+    }
+
     updateCommentsNum = (commentsNum) => {
         let articleId = this.props.match.params.id;
+        // console.log("before update from post.js ", this.state.article);
 
         let articleCopy = Object.assign({}, this.state.article);
         articleCopy.comments = commentsNum;
-        this.setState({ article : articleCopy });
+        this.setState({ article: articleCopy });
 
         API.updateComments(articleId, articleCopy.comments).then(res => {
             // localStorage.setItem(this.props.category, JSON.stringify(res.data));
             // localStorage.setItem(this.props.category + "Aged", JSON.stringify(res.data.sort(Methods.ageSort)));
             // localStorage.setItem(this.props.category + "Trending", JSON.stringify(res.data.sort(Methods.clickSort)));
+            // console.log("after update from post.js ", this.state.article);
             this.forceUpdate();
         });
-        
+
     }
 
     replyTo = (parentComment) => {
@@ -117,22 +131,22 @@ class Post extends Component {
                 <div className="container-fluid">
                     <div className="col-md-12">
                         {this.state.loading ? <LoadingWheel /> :
-                        <Article
-                            key={this.state.article.id}
-                            id={this.state.article.id}
-                            title={this.state.article.title}
-                            author={this.state.article.author}
-                            publAt={this.state.article.publishedAt}
-                            source={this.state.article.source}
-                            url={this.state.article.url}
-                            img={this.state.article.urlToImage}
-                            descr={this.state.article.description}
-                            look={""}
-                            category={this.state.article.category}
-                            clicks={this.state.article.clicks}
-                            comments={this.state.article.comments}
-                            page={"postpage"}
-                        />
+                            <Article
+                                key={this.state.article.id}
+                                id={this.state.article.id}
+                                title={this.state.article.title}
+                                author={this.state.article.author}
+                                publAt={this.state.article.publishedAt}
+                                source={this.state.article.source}
+                                url={this.state.article.url}
+                                img={this.state.article.urlToImage}
+                                descr={this.state.article.description}
+                                look={""}
+                                category={this.state.article.category}
+                                clicks={this.state.article.clicks}
+                                comments={this.state.article.comments}
+                                page={"postpage"}
+                            />
                         }
 
                         <div className="row">
@@ -153,10 +167,10 @@ class Post extends Component {
                                             <p className={this.state.replyToComment ? "replyToComment" : "hidden"}>
                                                 REPLYING TO #{this.state.parentComment}:
                                             </p>
-                                            <textarea className="form-control" id="commentForm" rows="3" 
-                                            onChange={this.handleComment} 
-                                            value={this.state.comment}
-                                            onClick={this.resetNewCommentsState}>
+                                            <textarea className="form-control" id="commentForm" rows="3"
+                                                onChange={this.handleComment}
+                                                value={this.state.comment}
+                                                onClick={this.resetNewCommentsState}>
                                             </textarea>
                                             <button type="button" className="btn commentSubmit" onClick={this.postComment}>SUBMIT</button>
                                         </div>

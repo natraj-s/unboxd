@@ -20,11 +20,21 @@ class Content extends React.Component {
         this.updateContent("");
     }
 
+    componentWillUnmount() {
+        console.log("unmounted");
+        this.setState({
+            content: [],
+            currentPage: "Breaking",
+            currentCat: "Homepage",
+            loading: false
+        });
+    }
+
     handleCatChange = cat => {
         this.setState({ currentCat: cat });
         this.updateContent(cat);
     }
-    
+
 
     handlePageChange = page => {
         this.setState({ currentPage: page });
@@ -49,7 +59,7 @@ class Content extends React.Component {
 
     sortBy = (order) => {
         // console.log("entered");
-        this.setState({ currentPage: order });        
+        this.setState({ currentPage: order });
         if (order === "Breaking") {
             // console.log("Breaking? ", order);
             this.setState({
@@ -64,7 +74,7 @@ class Content extends React.Component {
             });
 
         }
-        if(order === "Trending") {
+        if (order === "Trending") {
             // console.log("Trending? ", order);
             this.setState({
                 content: JSON.parse(localStorage.getItem(this.state.currentCat + "Trending")),
@@ -112,7 +122,7 @@ class Content extends React.Component {
         if (category === "Homepage") {
             API.getHomepage()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
@@ -137,7 +147,7 @@ class Content extends React.Component {
         if (category === "Entertainment") {
             API.getEntertainment()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
@@ -153,14 +163,14 @@ class Content extends React.Component {
         if (category === "Sports") {
             API.getSports()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-                    
+
                     setTimeout(() => {
                         this.handlePageChange(this.state.currentPage);
                     }, 2000);
@@ -169,14 +179,14 @@ class Content extends React.Component {
         if (category === "Science") {
             API.getScience()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-                    
+
                     setTimeout(() => {
                         this.handlePageChange(this.state.currentPage);
                     }, 2000);
@@ -185,14 +195,14 @@ class Content extends React.Component {
         if (category === "Health") {
             API.getHealth()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
                     data.forEach(elem => {
                         this.createArticle(elem, category);
                     });
-                    
+
                     setTimeout(() => {
                         this.handlePageChange(this.state.currentPage);
                     }, 2000);
@@ -201,7 +211,7 @@ class Content extends React.Component {
         if (category === "Tech") {
             API.getTechnology()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     console.log("I came ", data);
 
@@ -217,7 +227,7 @@ class Content extends React.Component {
         if (category === "VideoGames") {
             API.getVideoGames()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
@@ -233,7 +243,7 @@ class Content extends React.Component {
         if (category === "Business") {
             API.getBusiness()
                 .then(res => {
-                    this.setState({loading: true});
+                    this.setState({ loading: true });
                     data = res.data.articles;
                     // console.log("I came ", data);
 
@@ -256,9 +266,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("EntertainmentAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("EntertainmentTrending")) :
-                        JSON.parse(localStorage.getItem("Entertainment"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("EntertainmentTrending")) :
+                            JSON.parse(localStorage.getItem("Entertainment"))
                 });
                 // console.log("Ent difference is: " + diff);
             }
@@ -273,9 +283,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("SportsAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("SportsTrending")) :
-                        JSON.parse(localStorage.getItem("Sports"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("SportsTrending")) :
+                            JSON.parse(localStorage.getItem("Sports"))
                 });
                 // console.log("Sports difference is: " + diff);
             }
@@ -290,9 +300,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("ScienceAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("ScienceTrending")) :
-                        JSON.parse(localStorage.getItem("Science"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("ScienceTrending")) :
+                            JSON.parse(localStorage.getItem("Science"))
                 });
                 // console.log("Science difference is: " + diff);
             }
@@ -307,9 +317,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("HealthAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("HealthTrending")) :
-                        JSON.parse(localStorage.getItem("Health"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("HealthTrending")) :
+                            JSON.parse(localStorage.getItem("Health"))
                 });
                 // console.log("Health difference is: " + diff);
             }
@@ -324,9 +334,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("TechAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("TechTrending")) :
-                        JSON.parse(localStorage.getItem("Tech"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("TechTrending")) :
+                            JSON.parse(localStorage.getItem("Tech"))
                 });
                 // console.log("Tech difference is: " + diff);
             }
@@ -341,9 +351,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("VideoGamesAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("VideoGameTrending")) :
-                        JSON.parse(localStorage.getItem("VideoGames"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("VideoGameTrending")) :
+                            JSON.parse(localStorage.getItem("VideoGames"))
                 });
                 // console.log("VideoGames difference is: " + diff);
             }
@@ -358,9 +368,9 @@ class Content extends React.Component {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
                         JSON.parse(localStorage.getItem("BusinessAged")) :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("BusinessTrending")) :
-                        JSON.parse(localStorage.getItem("Business"))
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("BusinessTrending")) :
+                            JSON.parse(localStorage.getItem("Business"))
                 });
                 // console.log("Business difference is: " + diff);
             }
@@ -374,10 +384,10 @@ class Content extends React.Component {
             if (localStorage.getItem("Homepage") && !isNaN(diff) && diff < 180000000000000000) {
                 this.setState({
                     content: this.state.currentPage === "Aged" ?
-                        JSON.parse(localStorage.getItem("HomepageAged"))  :
-                        this.state.currentPage === "Trending" ? 
-                        JSON.parse(localStorage.getItem("HomepageTrending")) :
-                        JSON.parse(localStorage.getItem("Homepage"))
+                        JSON.parse(localStorage.getItem("HomepageAged")) :
+                        this.state.currentPage === "Trending" ?
+                            JSON.parse(localStorage.getItem("HomepageTrending")) :
+                            JSON.parse(localStorage.getItem("Homepage"))
                 });
                 // console.log("Homepage difference is: " + diff);
                 // console.log()
@@ -406,14 +416,14 @@ class Content extends React.Component {
                     />
                 </div>
                 <div className="container">
-                    {this.state.loading ? <LoadingWheel /> : 
+                    {this.state.loading ? <LoadingWheel /> :
                         <ContentPane props={this.state.content}
-                        category={this.state.currentCat}
-                        currentPage={this.state.currentPage}
-                        handlePageChange={this.sortBy}
-                        isLoggedIn={this.props.isLoggedIn}
-                        page="mainpage" />}
-                    
+                            category={this.state.currentCat}
+                            currentPage={this.state.currentPage}
+                            handlePageChange={this.sortBy}
+                            isLoggedIn={this.props.isLoggedIn}
+                            page="mainpage" />}
+
                 </div>
             </div>
         );
