@@ -1,17 +1,19 @@
 .singleComment {
-    border-radius: 4px;
-    box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
+    /* border-radius: 4px; */
+    /* box-shadow: 1px 1px 6px rgba(50,50,50,0.28); */
     padding-bottom: 5px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
     width: 100%;
 }
 
 .singleComment:nth-child(even) {
     border-left: 6px solid rgb(0, 184, 197);
+    border-bottom: 1px solid rgb(0, 184, 197);
 }
 
 .singleComment:nth-child(odd) {
     border-left: 6px solid rgb(0, 197, 105);
+    border-bottom: 1px solid rgb(0, 197, 105);
 }
 
 .commentHeader {

@@ -3,7 +3,7 @@ import "./Catbar.css";
 
 const Catbar = props => (
     <div className="container">
-        <div className="container-fluid">
+        <div className="container-fluid catbar">
             <ul className="nav nav-pills nav-fill">
                 <li onClick={() => props.handleCatChange("Homepage")}
                     className="nav-item">

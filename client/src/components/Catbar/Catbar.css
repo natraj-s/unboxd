@@ -8,9 +8,14 @@
     color: #fff;
 } */
 
+.catbar .nav-item {
+    transition: color .2s ease-in-out;
+}
+
 .nav-item:hover {
     color: #fff;
     text-shadow: 2px 1px 2px #343a40;
+    transition: color .2s ease-in-out;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {

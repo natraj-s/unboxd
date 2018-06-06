@@ -4,9 +4,9 @@ import API from "../utils/API";
 import "./Post.css";
 import LoadingWheel from "../components/LoadingWheel";
 import Article from "../components/Article";
-import Comment from "../components/Comment";
+// import Comment from "../components/Comment";
 import CommentsPane from "../components/CommentsPane";
-import Methods from "../utils/Methods";
+// import Methods from "../utils/Methods";
 
 class Post extends Component {
     constructor(props) {

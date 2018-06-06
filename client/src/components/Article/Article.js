@@ -43,7 +43,7 @@ class Article extends Component {
         localStorage.setItem(this.props.category, JSON.stringify(data));
         localStorage.setItem(this.props.category + "Aged", JSON.stringify(data.sort(Methods.ageSort)));
         localStorage.setItem(this.props.category + "Trending", JSON.stringify(data.sort(Methods.clickSort)));
-        // this.props.handlePageChange(this.props.currentPage);
+        this.props.handlePageChange(this.props.currentPage);
         console.log("test");
     }
 
@@ -142,7 +142,7 @@ class Article extends Component {
                                             {this.props.source}
                                         </span>
                                         <span>
-                                            <label id="publatlabel">POSTED AT: </label>{this.props.publAt}
+                                            <label id="publatlabel">POSTED AT: </label> {new Date(this.props.publAt).toLocaleDateString('en-EN', {hour: '2-digit', minute: '2-digit', weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})}
                                         </span>
                                         <ClicksNum page={this.props.page} clicks={this.state.clicks} />                                          
                                         <CommentsNum id={this.props.id} comments={this.props.comments} />                                    
