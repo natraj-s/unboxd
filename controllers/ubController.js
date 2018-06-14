@@ -111,6 +111,21 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
 
+    getClicks: function(req, res) {
+        db.Article
+            .find(
+                {
+                    attributes: ['clicks'],
+                    where: 
+                    {
+                        id: req.params.articleId
+                    }
+                }
+            )
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+
     update: function(req, res) {
         db.Article
             .update(

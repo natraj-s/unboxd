@@ -9,9 +9,9 @@ class ClicksNum extends Component {
 
     render() {
         return (
-            <span className={this.props.page === "userpage" ? "hidden" : ""}>
+            <li className={this.props.page === "userpage" ? "hidden" : "nav-item"}>
                 <label id="clickslabel">CLICKS: </label> {this.props.clicks}
-            </span>
+            </li>
         );
     }
 }
