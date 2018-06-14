@@ -10,6 +10,8 @@
     box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
     background-color: #FCF7F8;
     cursor: default;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .all {
@@ -52,7 +54,7 @@
 .artHeader, .artBody {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px;
+    padding-top: 4px;
 }
 
 .artHeader {
@@ -61,6 +63,34 @@
     border-top-right-radius: 4px;
     border-bottom: 1px solid #1869B1;
 }
+
+.title {
+    font-family: 'Patua One', cursive;
+    text-shadow: 2px 1px 2px #343a40;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,.1);    
+    padding-bottom: 2px;  
+}
+
+.artTitle {
+    position: relative;
+}
+
+@media(min-width: 800px) {
+    .artTitle {
+        overflow: hidden;  
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 20px;
+    }
+}
+
+@media(min-width: 0px) and (max-width: 800px) {
+    .artTitle {
+        font-size: 14px;
+    }
+}
+
 
 .all .dark,
 .belowPost.all .commentSubmit:hover {
@@ -218,21 +248,6 @@
     z-index: 999;
 }
 
-.title {
-    font-family: 'Patua One', cursive;
-    font-size: 20px;
-    text-shadow: 2px 1px 2px #343a40;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(0,0,0,.1);      
-}
-
-.artTitle {
-    position: relative;
-    overflow: hidden;  
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 .source { 
     padding-top: 3px;
     text-transform: uppercase;
@@ -248,8 +263,20 @@ p {
     padding-right: 5px;
 }
 
-.source span {
+.sourceName {
+    font-family: 'Patua One', cursive;
+    text-shadow: 1px 1px 3px #444444;
+}
+
+.source ul {
+    margin-top: 1px;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+
+.source li, .source span {
     margin-right: 15px;
+    height: 100%;
 }
 
 .artBody {
@@ -281,10 +308,16 @@ p {
 
 .oi {
     cursor: pointer;
-    font-size: 13px;
+    font-size: 11px;
+    line-height: .8;    
 }
 
 .liked {
-    font-size: 13px;
+    font-size: 11px;
     color: #00ffae; /* Old browsers */
+    text-shadow: 2px 1px 2px #343a40;
+}
+
+#clickslabel {
+    text-shadow: 2px 1px 2px #343a40;
 }

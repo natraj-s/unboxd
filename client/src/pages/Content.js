@@ -415,7 +415,7 @@ class Content extends React.Component {
                         updateContent={this.updateContent}
                     />
                 </div>
-                <div className="container">
+                <div className="container-fluid">
                     {this.state.loading ? <LoadingWheel /> :
                         <ContentPane props={this.state.content}
                             category={this.state.currentCat}

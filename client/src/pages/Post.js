@@ -127,9 +127,9 @@ class Post extends Component {
 
     render() {
         return (
-            <div className="row">
+            // <div className="row">
                 <div className="container-fluid">
-                    <div className="col-md-12">
+                    {/* <div className="col-md-12"> */}
                         {this.state.loading ? <LoadingWheel /> :
                             <Article
                                 key={this.state.article.id}
@@ -149,7 +149,7 @@ class Post extends Component {
                             />
                         }
 
-                        <div className="row">
+                        {/* <div className="row"> */}
                             <div className="container-fluid">
                                 <div className={this.state.article.category === "Entertainment" ? "col-md-12 belowPost entertainment" :
                                     this.state.article.category === "Sports" ? "col-md-12 belowPost sports" :
@@ -187,11 +187,11 @@ class Post extends Component {
                                     <CommentsPane comments={this.state.comments} replyTo={this.replyTo} />
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        {/* </div> */}
+                    {/* </div> */}
 
                 </div>
-            </div>
+            // </div>
         )
     }
 };

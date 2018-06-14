@@ -8,22 +8,22 @@ class CommentsNum extends Component {
         super(props);
     }
 
-    state = {
-        commentsNum: 0
-    }
+    // state = {
+    //     commentsNum: 0
+    // }
 
-    setComments = (articleId) => {
-        API.getNumComments(articleId).then(res => {
-            this.setState({
-                commentsNum: res.data
-            })
-        })
-    }
+    // setComments = (articleId) => {
+    //     API.getNumComments(articleId).then(res => {
+    //         this.setState({
+    //             commentsNum: res.data
+    //         })
+    //     })
+    // }
 
-    componentDidMount() {
-        // console.log("I mounted");
-        this.setComments(this.props.id);
-    }
+    // componentDidMount() {
+    //     // console.log("I mounted");
+    //     this.setComments(this.props.id);
+    // }
 
     // componentWillReceiveProps(nextState) {
     //     let nextComments = parseInt(nextState.comments, 10);
@@ -34,11 +34,11 @@ class CommentsNum extends Component {
 
     render() {
         return (
-            <span>
+            <li className="nav-item">
                 <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
-                    <label id="commentslabel" title="Read comments on this post">COMMENTS: </label> {this.state.commentsNum}
+                    <label id="commentslabel" title="Read comments on this post">COMMENTS : </label> {this.props.comments}
                 </Link>
-            </span>
+            </li>
         );
     }
 }

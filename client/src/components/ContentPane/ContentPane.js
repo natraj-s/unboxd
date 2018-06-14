@@ -3,7 +3,7 @@ import Article from "../../components/Article";
 import "./ContentPane.css";
 
 const ContentPane = props => (
-    <div className="container-fluid contentArea">
+    <div className="contentArea">
         {/* {console.log(props)} */}
         {!props.props ?
             <p>Undefined</p> :
@@ -22,7 +22,7 @@ const ContentPane = props => (
                     category={props.category}
                     currentPage={props.currentPage}
                     handlePageChange={props.handlePageChange}
-                    clicks={article.clicks}
+                    // clicks={article.clicks}
                     // comments={article.comments}
                     likes={article.likes}
                     isLoggedIn={props.isLoggedIn}
@@ -40,7 +40,7 @@ const ContentPane = props => (
                     descr={article.description}
                     look={index%2 !== 0 ? "dark" : ""}
                     category={article.category}
-                    clicks={article.clicks}
+                    // clicks={article.clicks}
                     // comments={article.comments}
                     page={props.page}                    
                 />

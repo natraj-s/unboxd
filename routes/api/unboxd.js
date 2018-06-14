@@ -29,6 +29,10 @@ router
   .get(ubController.getOldest);
 
 router
+  .route("/getClicks/:articleId")
+  .get(ubController.getClicks);
+
+router
   .route("/clicks/:title/:clicks")
   .put(ubController.update);
 
