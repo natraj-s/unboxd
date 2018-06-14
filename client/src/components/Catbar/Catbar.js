@@ -39,11 +39,11 @@ const Catbar = props => (
                 </li>
                 <li onClick={() => props.handleCatChange("USPolitics")}
                     className="nav-item">
-                    <a className={props.currentCat === "USPolitics" ? "nav-link active" : "nav-link"}>US POLITICS</a>
+                    <a className={props.currentCat === "USPolitics" ? "nav-link active" : "nav-link"}><strike>US POLITICS</strike></a>
                 </li>
                 <li onClick={() => props.handleCatChange("WorldPolitics")}
                     className="nav-item">
-                    <a className={props.currentCat === "WorldPolitics" ? "nav-link active" : "nav-link"}>WORLD</a>
+                    <a className={props.currentCat === "WorldPolitics" ? "nav-link active" : "nav-link"}><strike>WORLD</strike></a>
                 </li>
             </ul>
         </div>

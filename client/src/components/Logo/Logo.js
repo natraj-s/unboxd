@@ -8,10 +8,17 @@ const Logo = (props) =>
             {/* {console.log(props)} */}
             <div className="row">
                 <div className="col-md-6 col-sm-6 col-xs-1 logoContainer">
-                    <Link to={"/"}>
-                        <p id="logo">unBox'd </p>
-                        <p id="subtext">A NEW FRONTPAGE </p>
+                    <p id="logo">
+                        <Link to={"/"}>
+                            unBox'd
                     </Link>
+                    </p>
+                    <p id="subtext">
+                        <Link to={"/"}>
+                            A NEW FRONTPAGE
+                    </Link>
+                    </p>
+
                 </div>
                 <div className="col-md-6 col-sm-6 col-xs-1 loginContainer">
                     <Link to={"/login"}>

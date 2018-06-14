@@ -97,7 +97,8 @@
 
 @media(min-width: 0px) and (max-width: 800px) {
     .artTitle {
-        font-size: 14px;
+        font-size: 15px;
+        letter-spacing: .08ch;
     }
 
     .source ul {
@@ -253,6 +254,7 @@
     width: 100px;
     height: 50px;
     border-radius: 4px;
+    border: 1px solid rgba(50,50,50,0.28);
     background-color: #fff;
     background-size: cover;
     box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
