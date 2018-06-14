@@ -26,12 +26,16 @@ const Logo = (props) =>
                             <hr />
                         </div>
                         <div className="navSection">
-                            <Link to={"/userpage"}>
-                                <p>PROFILE PAGE<span className="oi oi-caret-left"></span></p>
-                            </Link>
-                            <Link to={"/logout"}>                                
-                                <p>LOGOUT<span className="oi oi-caret-left"></span></p>
-                            </Link>
+                            <p>
+                                <Link to={"/userpage"}>
+                                    PROFILE PAGE<span className="oi oi-caret-left"></span>
+                                </Link>
+                            </p>
+                            <p>
+                                <Link to={"/logout"}>
+                                    LOGOUT<span className="oi oi-caret-left"></span>
+                                </Link>
+                            </p>
                         </div>
                     </div>
                 </div>

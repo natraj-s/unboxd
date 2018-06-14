@@ -83,14 +83,27 @@
         text-overflow: ellipsis;
         font-size: 20px;
     }
+
+    .source ul {
+        margin-top: 2px;
+    }
+
+    .artDescr {
+        overflow: hidden;  
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
 }
 
 @media(min-width: 0px) and (max-width: 800px) {
     .artTitle {
         font-size: 14px;
     }
-}
 
+    .source ul {
+        margin-top: 5px;
+    }
+}
 
 .all .dark,
 .belowPost.all .commentSubmit:hover {
@@ -269,8 +282,6 @@ p {
 }
 
 .source ul {
-    margin-top: 1px;
-    margin-bottom: 4px;
     line-height: 1;
 }
 
@@ -284,12 +295,6 @@ p {
     text-align: justify;
     cursor: pointer;
     font-size: 12px;    
-}
-
-.artDescr {
-    overflow: hidden;  
-    white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 /* .artBody:hover{
