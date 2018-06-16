@@ -2,16 +2,17 @@
 
 .article {
     border-radius: 4px;
+    border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     margin-top: 8px;
-    display: block;
     text-align: left;
     box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
     background-color: #FCF7F8;
     cursor: default;
     padding-left: 0;
-    padding-right: 0;
+
 }
 
 .all {
@@ -59,22 +60,75 @@
 
 .artHeader {
     /* background-color: #0084CC; */
-    color: #F8F8F8;
     border-top-right-radius: 4px;
     border-bottom: 1px solid #1869B1;
 }
 
 .title {
-    font-family: 'Patua One', cursive;
-    text-shadow: 2px 1px 2px #343a40;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(0,0,0,.1);    
-    padding-bottom: 2px;  
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .artTitle {
-    position: relative;
+    font-family: 'Patua One', cursive;
+    text-shadow: 2px 1px 2px #343a40;
+    position: relative;    
+    padding-bottom: 2px; 
+    cursor: pointer; 
+    color: #F8F8F8;
 }
+
+.image {
+    width: 100px;
+    height: 50px;
+    border-radius: 4px;
+    /* border: 1px solid rgba(50,50,50,0.28); */
+    background-color: #fff;
+    background-size: cover;
+    box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
+    margin-right: 15px;
+    float: left;
+    z-index: 999;
+}
+
+.source { 
+    padding-top: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+    font-size: 11px;
+    position: relative;
+    color: #F8F8F8;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.source label {    
+    padding-right: 5px;
+}
+
+.sourceName {
+    font-family: 'Patua One', cursive;
+    text-shadow: 1px 1px 3px #444444;
+    letter-spacing: .08ch;
+}
+
+.source ul {
+    line-height: 1;
+}
+
+.source li, .source span {
+    margin-right: 15px;
+    height: 100%;
+}
+
+.artBody {
+    background-color: #FCF7F8;
+    text-align: justify;
+    cursor: pointer;
+    font-size: 12px;    
+}
+
 
 @media(min-width: 800px) {
     .artTitle {
@@ -249,59 +303,6 @@
     background: linear-gradient(45deg, #004e92 0%,#151c5e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004e92', endColorstr='#151c5e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-
-.image {
-    width: 100px;
-    height: 50px;
-    border-radius: 4px;
-    border: 1px solid rgba(50,50,50,0.28);
-    background-color: #fff;
-    background-size: cover;
-    box-shadow: 1px 1px 6px rgba(50,50,50,0.28);
-    margin-right: 15px;
-    float: left;
-    z-index: 999;
-}
-
-.source { 
-    padding-top: 3px;
-    text-transform: uppercase;
-    line-height: 1;
-    font-size: 11px;
-}
-
-p {
-    margin-bottom: 0;
-}
-
-.source label {    
-    padding-right: 5px;
-}
-
-.sourceName {
-    font-family: 'Patua One', cursive;
-    text-shadow: 1px 1px 3px #444444;
-}
-
-.source ul {
-    line-height: 1;
-}
-
-.source li, .source span {
-    margin-right: 15px;
-    height: 100%;
-}
-
-.artBody {
-    background-color: #FCF7F8;
-    text-align: justify;
-    cursor: pointer;
-    font-size: 12px;    
-}
-
-/* .artBody:hover{
-    background-color: #fff;
-} */
 
 .misc {
     text-align: right;

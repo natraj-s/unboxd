@@ -126,14 +126,9 @@ class Article extends Component {
         })
     }
 
-    // Need a find all likes function which gets all the like columns, parses through
-    // each of the strings, if it finds the current user, then adds that article
-    // to array, continue onto next;    
-
     render() {
         return (
-            // <div className="row">
-            <div className="container-fluid">
+            <div className="col-md-12">
                 <div className={this.props.category === "Entertainment" ? "article entertainment" :
                     this.props.category === "Sports" ? "article sports" :
                         this.props.category === "Science" ? "article science" :
@@ -170,23 +165,22 @@ class Article extends Component {
                             </ul>
                         </div>
                     </div>
-
-                    <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
-                        <div className="artBody" title="Read comments on this post">
-                            <p className={this.state.hidden ? "hidden" : "artDescr"}>
+                    <div className="artBody" title="Read comments on this post">
+                        <p className={this.state.hidden ? "hidden" : "artDescr"}>
+                            <Link to={"/post/" + this.props.id} params={{ id: this.props.id }}>
                                 {(this.props.descr === null || this.props.descr === "") ? "No description available" : this.props.descr}
-                            </p>
+                            </Link>
+                        </p>
 
-                            <div className="misc" title="Collapse">
-                                {/* <span  */}
-                                <span onClick={this.hideThis}
-                                    className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}></span>
-                            </div>
+                        <div className="misc" title="Collapse">
+                            <span onClick={this.hideThis}
+                                className={this.state.hidden ? "oi oi-chevron-bottom" : "oi oi-chevron-top"}>
+                            </span>
                         </div>
-                    </Link>
+                    </div>
+
                 </div>
             </div>
-            // </div>
         );
     }
 }
