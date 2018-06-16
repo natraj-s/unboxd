@@ -4,7 +4,8 @@ import "./Navbar.css";
 const Navbar = props => (
     <div className="container">
         <div className="container-fluid catbar">
-            <ul className="nav justify-content-center nav-tabs">
+        <div class="card-header">
+            <ul className="nav justify-content-center nav-tabs card-header-tabs">
                 {/* { console.log(props) } */}
                 <li onClick={() => props.handlePageChange("Breaking")}
                     className="nav-item">
@@ -19,6 +20,7 @@ const Navbar = props => (
                     <a className={props.currentPage === "Aged" ? "nav-link active" : "nav-link"}>AGED</a>
                 </li>
             </ul>
+            </div>
         </div>
     </div>
 );

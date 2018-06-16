@@ -415,7 +415,6 @@ class Content extends React.Component {
                         updateContent={this.updateContent}
                     />
                 </div>
-                <div className="container-fluid">
                     {this.state.loading ? <LoadingWheel /> :
                         <ContentPane props={this.state.content}
                             category={this.state.currentCat}
@@ -424,7 +423,6 @@ class Content extends React.Component {
                             isLoggedIn={this.props.isLoggedIn}
                             page="mainpage" />}
 
-                </div>
             </div>
         );
     }
